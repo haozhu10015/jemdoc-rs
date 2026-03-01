@@ -583,7 +583,7 @@ impl JemdocParser {
 
                 let option = if link.starts_with('\\') {
                     link = link[1..].to_string();
-                    " target=\"blank\""
+                    " target=\"_blank\""
                 } else {
                     ""
                 };

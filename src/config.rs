@@ -138,7 +138,7 @@ gtag('config', '|');
 </div>
 
 [lastupdated]
-Page generated |, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="blank">jemdoc-rs</a>.
+Page generated |, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
 
 [sourcelink]
 (<a href="|">source</a>)
