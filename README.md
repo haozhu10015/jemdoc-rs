@@ -1,6 +1,6 @@
 # jemdoc-rs
 
-A Rust rewrite of [jemdoc+MathJax](https://wsshin.github.io/jemdoc+mathjax/), a light text-based markup language for creating static websites.
+A Rust rewrite of [jemdoc+MathJax](https://github.com/wsshin/jemdoc_mathjax), a light text-based markup language for creating static websites.
 
 `jemdoc-rs` converts `.jemdoc` source files into clean, standards-compliant HTML5 pages with built-in support for MathJax 4.
 
