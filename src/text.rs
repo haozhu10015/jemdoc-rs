@@ -352,7 +352,7 @@ pub fn replace_links(b: &str) -> String {
                     option = "";
                     m1 = m1[1..].to_string();
                 } else {
-                    option = " target=\"blank\"" ;
+                    option = "TARGETBLANK65358";
                 }
 
                 let mut link = if m1.contains('@')
@@ -624,6 +624,9 @@ pub fn br(b: &str, eqs: bool, tableblock: bool, tablerow: &mut usize) -> String 
     // Restore double braces
     b = b.replace("DOUBLEOPENBRACE", "{{");
     b = b.replace("DOUBLECLOSEBRACE", "}}");
+
+    // Restore target="_blank" attribute
+    b = b.replace("TARGETBLANK65358", r#" target="_blank""#);
 
     b
 }
