@@ -1,0 +1,9 @@
+[package]
+name = "jemdoc-rs"
+version = "0.7.3"
+edition = "2024"
+
+[dependencies]
+fancy-regex = "0.14"
+chrono = "0.4"
+libc = "0.2"
