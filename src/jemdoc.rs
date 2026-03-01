@@ -786,9 +786,11 @@ impl JemdocParser {
         let windowtitle_conf = self.conf("windowtitle");
         self.hb(&windowtitle_conf, &window_title, None, None);
 
-        // MathJax (always injected, independently of bodystart so user conf overrides don't lose it)
-        let mathjax = self.conf("mathjax");
-        self.out(&mathjax);
+        // MathJax (skip if equations are disabled via noeqs)
+        if self.eqs {
+            let mathjax = self.conf("mathjax");
+            self.out(&mathjax);
+        }
 
         // Body start
         let bodystart = self.conf("bodystart");
@@ -841,7 +843,20 @@ impl JemdocParser {
             if p == "\\(" {
                 // Whole-line equation
                 if !self.eqs {
-                    break;
+                    // Skip the equation block without processing
+                    let (s, _) = self.nl(false, false).unwrap_or_default();
+                    if !s.trim().ends_with("\\)") {
+                        loop {
+                            let line = match self.nl(false, true) {
+                                Some((l, _)) => l,
+                                None => break,
+                            };
+                            if line.trim() == "\\)" {
+                                break;
+                            }
+                        }
+                    }
+                    continue;
                 }
                 let (mut s, _) = self.nl(false, false).unwrap_or_default();
 
