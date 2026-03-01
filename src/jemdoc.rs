@@ -547,8 +547,12 @@ impl JemdocParser {
 
     /// Insert menu items from a MENU file.
     pub fn insert_menu_items(&mut self, mname: &str, current: &str, prefix: &str) {
-        // Resolve the MENU file path relative to the input file's directory.
+        // Resolve the MENU file path:
+        // 1. Try the path as given (relative to CWD).
+        // 2. Fall back to resolving relative to the input file's directory.
         let menu_path = if std::path::Path::new(mname).is_absolute() {
+            std::path::PathBuf::from(mname)
+        } else if std::path::Path::new(mname).exists() {
             std::path::PathBuf::from(mname)
         } else {
             let indir = std::path::Path::new(&self.inname)
@@ -613,7 +617,7 @@ impl JemdocParser {
                     }
                 }
 
-                if link.ends_with(current) {
+                if !current.is_empty() && link.ends_with(current) {
                     self.hb(
                         &currentmenuitem_conf,
                         &link,
