@@ -12,7 +12,7 @@ pub fn standard_conf() -> String {
 <meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
 
 [defaultcss]
-<link rel="stylesheet" href="css/jemdoc.css" type="text/css" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
 
 [windowtitle]
 <title>|</title>
