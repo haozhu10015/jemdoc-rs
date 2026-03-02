@@ -1067,9 +1067,12 @@ impl JemdocParser {
             }
 
             if show_source_link {
-                let inname = self.inname.clone();
+                let basename = std::path::Path::new(&self.inname)
+                    .file_name()
+                    .map(|f| f.to_string_lossy().to_string())
+                    .unwrap_or_else(|| self.inname.clone());
                 let sourcelink = self.conf("sourcelink");
-                self.hb(&sourcelink, &inname, None, None);
+                self.hb(&sourcelink, &basename, None, None);
             }
 
             let footerend = self.conf("footerend");
