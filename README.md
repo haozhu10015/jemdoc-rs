@@ -53,6 +53,22 @@ jemdoc-rs [OPTIONS] [SOURCEFILE...]
 | `--version` | Show version information |
 | `--help`, `-h` | Show help message |
 
+## Example
+
+The `example/` directory contains a set of `.jemdoc` files demonstrating the full feature set. To generate and preview them:
+
+```sh
+cd example
+
+# Generate all HTML pages
+make jemdoc
+
+# Preview locally at http://127.0.0.1:8000
+make preview
+```
+
+`make jemdoc` runs `jemdoc-rs -c mysite.conf *.jemdoc` and writes the HTML output in place. `make preview` starts a local HTTP server using [`simple-http-server`](https://github.com/TheWaWaR/simple-http-server) (installed automatically via Cargo if not already present). Run `make help` to see all available targets.
+
 ## Markup Reference
 
 ### Titles and Headings
