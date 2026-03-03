@@ -465,7 +465,7 @@ impl JemdocParser {
                 first_line = false;
             } else if lang == "jemdoc" {
                 let ltrimmed = line.trim_start();
-                let special_starts = ["#", "~", ">>>", "\\~", "{"];
+                let special_starts = ["#", "~", ">>>", "\\~"];
                 let mut handled = false;
                 for prefix in &special_starts {
                     if ltrimmed.starts_with(prefix) {
@@ -490,12 +490,17 @@ impl JemdocParser {
                     if !handled2 {
                         if ltrimmed.starts_with('=') {
                             self.out(&format!("{}<br />", prepend_nbsps(&line)));
-                        } else {
+                        } else if ltrimmed.is_empty() {
                             self.out(&line);
+                        } else {
+                            let prefix_str = if first_line { "" } else { "<br />" };
+                            self.out(&format!("{}{}", prefix_str, line));
                         }
                     }
+                    first_line = false;
+                } else {
+                    first_line = true;
                 }
-                first_line = false;
             } else {
                 // Check for includes in code blocks
                 if line.starts_with("\\#include{") || line.starts_with("\\#includeraw{") {
