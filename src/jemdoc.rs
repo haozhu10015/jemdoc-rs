@@ -429,6 +429,7 @@ impl JemdocParser {
         }
 
         let mut stringmode = false;
+        let mut first_line = true;
 
         loop {
             let line = match self.nl(false, true) {
@@ -461,6 +462,7 @@ impl JemdocParser {
             if lang == "pyint" {
                 let formatted = format_pyint(&line);
                 self.out(&formatted);
+                first_line = false;
             } else if lang == "jemdoc" {
                 let ltrimmed = line.trim_start();
                 let special_starts = ["#", "~", ">>>", "\\~", "{"];
@@ -479,7 +481,8 @@ impl JemdocParser {
                     let mut handled2 = false;
                     for prefix in &colon_starts {
                         if ltrimmed.starts_with(prefix) {
-                            self.out(&format!("<br />{}", prepend_nbsps(&line)));
+                            let prefix_str = if first_line { "" } else { "<br />" };
+                            self.out(&format!("{}{}", prefix_str, prepend_nbsps(&line)));
                             handled2 = true;
                             break;
                         }
@@ -492,6 +495,7 @@ impl JemdocParser {
                         }
                     }
                 }
+                first_line = false;
             } else {
                 // Check for includes in code blocks
                 if line.starts_with("\\#include{") || line.starts_with("\\#includeraw{") {
@@ -508,6 +512,7 @@ impl JemdocParser {
                     let formatted = format_language(&line, &hl);
                     self.out(&formatted);
                 }
+                first_line = false;
             }
         }
 
