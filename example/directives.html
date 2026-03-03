@@ -38,7 +38,7 @@ MathJax = {
 <div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
 <div class="menu-category">Configuration</div>
 <div class="menu-item"><a href="directives.html" class="current">Directives</a></div>
-<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+<div class="menu-item"><a href="http://www.example.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
 </td>
 <td id="layout-content">
 <div id="toptitle">
@@ -47,11 +47,12 @@ MathJax = {
 <h2>Header Directives</h2>
 <p>Directives are placed at the top of a <tt>.jemdoc</tt> file as special comments.  They control page-level settings.
 </p>
-<pre>
-# jemdoc: menu{MENU}{thispage.html}
-# jemdoc: addcss{custom.css}
-# jemdoc: title{Custom Window Title}
-</pre>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl"># jemdoc: menu{MENU}{thispage.html}
+</pre><tt class="tthl"></tt><pre class="tthl"># jemdoc: addcss{custom.css}
+</pre><tt class="tthl"></tt><pre class="tthl"># jemdoc: title{Custom Window Title}
+</pre><tt class="tthl"></tt></div></div>
 <h3>Available Directives</h3>
 <table id="directives-table">
 <tr class="r1"><td class="c1">Directive                               </td><td class="c2"> Description                                               </td></tr>
@@ -70,22 +71,13 @@ MathJax = {
 </td></tr></table>
 <p>Multiple directives can go on a single line, separated by commas:
 </p>
-<pre>
-# jemdoc: menu{MENU}{page.html}, analytics{G-XXXXXXXXXX}, showsource
-</pre>
-<h2>Menu Files</h2>
-<p>A <tt>MENU</tt> file defines the navigation sidebar.  Indented lines with <tt>[link]</tt> are menu items; non-indented lines are category headers.
-</p>
 <div class="codeblock">
-<div class="blocktitle">Example MENU file</div>
 <div class="blockcontent"><tt class="tthl">
-Category Name
-<br />    Page One        [page1.html]
-<br />    Page Two        [page2.html]
-
-<br />Another Category
-<br />    External Link   [\http://example.com]
-</tt></div></div>
+</tt><pre class="tthl"># jemdoc: menu{MENU}{page.html}, analytics{G-XXXXXXXXXX}, showsource
+</pre><tt class="tthl"></tt></div></div>
+<h2>Menu Files</h2>
+<p>A <tt>MENU</tt> file defines the navigation sidebar.  Non-indented lines are category headers; indented lines with <tt>[link]</tt> are menu items.  See the <tt>MENU</tt> file used by this example site.
+</p>
 <ul>
 <li><p>The <i>current page</i> is automatically highlighted based on the second argument of the <tt>menu</tt> directive.
 </p>
@@ -100,9 +92,10 @@ Category Name
 <h3>Subfolder Pages</h3>
 <p>For pages in subdirectories, use the third <tt>prefix</tt> argument:
 </p>
-<pre>
-# jemdoc: menu{MENU}{}{../}
-</pre>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl"># jemdoc: menu{MENU}{}{../}
+</pre><tt class="tthl"></tt></div></div>
 <p>This prepends <tt>../</tt> to each menu link, so they resolve correctly from the subfolder.
 </p>
 <h2>Configuration Files</h2>
@@ -130,12 +123,12 @@ jemdoc-rs -c mysite.conf *.jemdoc
 </pre></div></div>
 <p>Multiple <tt>-c</tt> flags can be used; later files take precedence.
 </p>
-<h3>This Page</h3>
+<h2>This Page</h2>
 <p>This page uses <tt>showsource</tt>&#8201;&mdash;&#8201;check the footer for a link to its <tt>.jemdoc</tt> source.
 </p>
 <div id="footer">
 <div id="footer-text">
-Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+Page generated 2026-03-03 19:06:55 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
 (<a href="directives.jemdoc">source</a>)
 </div>
 </div>

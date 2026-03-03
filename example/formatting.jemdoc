@@ -77,6 +77,12 @@ Like this---a new paragraph without blank lines in the source.
 
 Lines starting with +\#+ are comments and do not appear in the output:
 
+~~~
+{}{jemdoc}
+# This is a comment---you cannot see it in the rendered page.
+The line above this paragraph is a comment in the source.
+~~~
+
 # This is a comment---you cannot see it in the rendered page.
 The line above this paragraph is a comment in the source.
 

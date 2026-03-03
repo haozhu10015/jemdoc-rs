@@ -1,18 +1,16 @@
 # jemdoc: menu{MENU}{directives.html}
 # jemdoc: showsource
-== Header Directives and Configuration
+= Header Directives and Configuration
 
 == Header Directives
 
 Directives are placed at the top of a +.jemdoc+ file as special comments.  They control page-level settings.
 
 ~~~
-{}{raw}
-<pre>
+{}{jemdoc}
 # jemdoc: menu{MENU}{thispage.html}
 # jemdoc: addcss{custom.css}
 # jemdoc: title{Custom Window Title}
-</pre>
 ~~~
 
 === Available Directives
@@ -37,25 +35,13 @@ Directive                               | Description                           
 Multiple directives can go on a single line, separated by commas:
 
 ~~~
-{}{raw}
-<pre>
+{}{jemdoc}
 # jemdoc: menu{MENU}{page.html}, analytics{G-XXXXXXXXXX}, showsource
-</pre>
 ~~~
 
 == Menu Files
 
-A +MENU+ file defines the navigation sidebar.  Indented lines with +\[link\]+ are menu items; non-indented lines are category headers.
-
-~~~
-{Example MENU file}{jemdoc}
-Category Name
-    Page One        [page1.html]
-    Page Two        [page2.html]
-
-Another Category
-    External Link   [\http://example.com]
-~~~
+A +MENU+ file defines the navigation sidebar.  Non-indented lines are category headers; indented lines with +\[link\]+ are menu items.  See the +MENU+ file used by this example site.
 
 - The /current page/ is automatically highlighted based on the second argument of the +menu+ directive.
 - Prefix a link with +\\+ to open it in a new tab (useful for external links).
@@ -66,10 +52,8 @@ Another Category
 For pages in subdirectories, use the third +prefix+ argument:
 
 ~~~
-{}{raw}
-<pre>
+{}{jemdoc}
 # jemdoc: menu{MENU}{}{../}
-</pre>
 ~~~
 
 This prepends +..\/+ to each menu link, so they resolve correctly from the subfolder.
@@ -102,6 +86,6 @@ jemdoc-rs -c mysite.conf *.jemdoc
 
 Multiple +-c+ flags can be used; later files take precedence.
 
-=== This Page
+== This Page
 
 This page uses +showsource+---check the footer for a link to its +.jemdoc+ source.
