@@ -16,12 +16,12 @@ All three brace parameters are optional.  Examples:
 
 ~~~
 {}{jemdoc}
-[img{100}{100}{icon} img/favicon-doc.svg]
-[img{200}{}{wide logo} img/favicon-doc.svg]
-[img{}{}{} img/favicon-doc.svg]
+[img{100}{100}{icon} img/favicon-jr.svg]
+[img{200}{}{wide logo} img/favicon-jr.svg]
+[img{}{}{} img/favicon-jr.svg]
 ~~~
 
-Here is an inline image: [img{80}{80}{icon} img/favicon-doc.svg]
+Here is an inline image: [img{80}{80}{icon} img/favicon-jr.svg]
 
 == Image Blocks
 
@@ -38,7 +38,7 @@ Description text goes here.
 === Example
 
 ~~~
-{}{img_left}{img/favicon-doc.svg}{documentation icon}{100}{100}{}
+{}{img_left}{img/favicon-jr.svg}{jemdoc-rs icon}{100}{100}{}
 *jemdoc-rs* is a Rust rewrite of jemdoc\+MathJax.
 
 Image blocks are useful for author photos, project logos, or product screenshots.  The text wraps naturally beside the image.
@@ -51,6 +51,6 @@ You can include *formatted text*, /italics/, [http://example.com links], and eve
 If the sixth parameter is a URL, the image becomes clickable:
 
 ~~~
-{}{img_left}{img/favicon-doc.svg}{documentation icon}{80}{80}{http://github.com/haozhu10015/jemdoc-rs}
+{}{img_left}{img/favicon-jr.svg}{jemdoc-rs icon}{80}{80}{http://github.com/haozhu10015/jemdoc-rs}
 Clicking this image takes you to the jemdoc-rs GitHub repository.
 ~~~
