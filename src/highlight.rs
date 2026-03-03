@@ -161,6 +161,27 @@ pub fn get_hl(lang: &str) -> HighlightDef {
             d.commentuntilend = vec!["%".to_string()];
             d.strings = true;
         }
+        "rs" | "rust" => {
+            d.statement = put_bsbs(&[
+                "as", "break", "const", "continue", "crate", "else", "enum", "extern", "false",
+                "fn", "for", "if", "impl", "in", "let", "loop", "match", "mod", "move", "mut",
+                "pub", "ref", "return", "self", "Self", "static", "struct", "super", "trait",
+                "true", "type", "unsafe", "use", "where", "while", "async", "await", "dyn",
+            ]);
+            d.builtin = put_bsbs(&[
+                "bool", "u8", "u16", "u32", "u64", "u128", "usize",
+                "i8", "i16", "i32", "i64", "i128", "isize",
+                "f32", "f64", "char", "str", "String", "Vec", "Option", "Result",
+                "Some", "None", "Ok", "Err", "Box", "Rc", "Arc",
+            ]);
+            d.operator = vec![
+                "#\\[.*\\]".to_string(),
+                "#!\\[.*\\]".to_string(),
+            ];
+            d.error = put_bsbs(&[r"\w*Error", r"\w*Err"]);
+            d.commentuntilend = vec!["//".to_string()];
+            d.strings = true;
+        }
         "commented" => {
             d.commentuntilend = vec!["#".to_string()];
         }
