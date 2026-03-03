@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Link Behavior</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html" class="current">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Link Behavior</h1>
+</div>
+<p>You can control the behavior of a link: by default the link opens in a new web broswer tab, but by putting a slash (<tt>/</tt>) character at the beginning of the link address you can make it open in the current web broswer tab.  
+</p>
+<p>For example, <a href="mathjax.html" target="_blank"><tt>[mathjax.html]</tt></a> opens in a new web broswer tab, but <a href="mathjax.html"><tt>[/mathjax.html]</tt></a> opens in the current web browser tab.  The link opening in a new tab is useful for linking an external website (like <a href="http://www.google.com" target="_blank">http://www.google.com</a>), whereas the link opening in the current tab is useful for liking your jemdoc page (such as the page linked as a jemdoc menu item on the left panel).
+</p>
+<p>Unlike the link in the main text, a jemdoc menu item link on the left panel opens in the current tab by default, because you want to stay in the same tab while navigating menu items.  However, you can override this default behavior and make it open in a new tab by putting a backslash (<tt>\</tt>) character in the beginning of the link of the menu item.  This is useful when putting an external website as a menu item.  See this usage in &ldquo;Open in New Tab&rdquo; menu item on the left panel, which is defined in <tt>MENU</tt> file.
+</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="link.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

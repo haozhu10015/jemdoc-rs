@@ -1,0 +1,103 @@
+# jemdoc: menu{MENU}{formatting.html}, showsource
+= Text Formatting
+
++jemdoc-rs+ provides several inline formatting options.
+
+== Basic Formatting
+
+~~~
+{Markup}{jemdoc}
+*Bold text*
+/Italic text/
+_Underlined text_
++Monospace text+
+~~~
+
+Renders as: *Bold text*, /italic text/, _underlined text_, +monospace text+.
+
+== Combining Styles
+
+You can nest formatting markers:
+
+- */Bold italic/*
+- *_Bold underline_*
+- /_Italic underline_/
+- *+Bold monospace+*
+
+== Special Characters
+
+~~~
+{}{table}
+Markup      | Renders as    | Description           ||
++\-\-\-+   | ---           | Em dash               ||
++\-\-+     | --            | En dash               ||
++\.\.\.+   | ...           | Ellipsis              ||
++\~+       | ~             | Non-breaking space     ||
++\\R+      | \R            | Registered trademark   ||
++\\C+      | \C            | Copyright              ||
++\\M+      | \M            | Middle dot
+~~~
+
+== Quotes
+
++jemdoc-rs+ converts straight quotes into typographic (curly) quotes:
+
+- Double quotes: "like this"
+- Single left quote: `like this
+- Apostrophe: it's automatic
+
+== Escaping
+
+Precede any special character with a backslash to output it literally:
+
+- +\\\*+ produces \*
+- +\\\/+ produces \/
+- +\\\_+ produces \_
+- +\\\++ produces \+
+- +\\\~+ produces \~
+- +\\\#+ produces \#
+- +\\\$+ produces \$
+- +\\\\\\+ produces \\
+
+== Monospace with Percent Signs
+
+Use percent signs for monospace that preserves special characters inside:
+
++\%<div class="example">\%+ renders as: %<div class="example">%
+
+== Line Breaks and Paragraph Breaks
+
+A backslash-n (\\n) forces a line break within a paragraph.\n
+Like this.
+
+A backslash-p (\\p) forces a new paragraph mid-block.\p
+Like this---a new paragraph without blank lines in the source.
+
+== Comments
+
+Lines starting with +\#+ are comments and do not appear in the output:
+
+# This is a comment---you cannot see it in the rendered page.
+The line above this paragraph is a comment in the source.
+
+== Headings
+
+jemdoc-rs supports four levels of headings using +\=+ signs:
+
+~~~
+{}{jemdoc}
+= Page Title (H1)
+== Section (H2)
+=== Subsection (H3)
+==== Sub-subsection (H4)
+~~~
+
+= This is H1
+
+== This is H2
+
+=== This is H3
+
+==== This is H4
+
+In a +.jemdoc+ source, if some level of headings is used directly after the +\# jemdoc:+ [directives.html configurations] without blank lines, it will also sets the browser window title unless overridden by the +title+ directive.

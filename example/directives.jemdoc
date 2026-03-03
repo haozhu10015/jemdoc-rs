@@ -1,0 +1,107 @@
+# jemdoc: menu{MENU}{directives.html}
+# jemdoc: showsource
+== Header Directives and Configuration
+
+== Header Directives
+
+Directives are placed at the top of a +.jemdoc+ file as special comments.  They control page-level settings.
+
+~~~
+{}{raw}
+<pre>
+# jemdoc: menu{MENU}{thispage.html}
+# jemdoc: addcss{custom.css}
+# jemdoc: title{Custom Window Title}
+</pre>
+~~~
+
+=== Available Directives
+
+~~~
+{}{table}{directives-table}
+Directive                               | Description                                               ||
++menu\{FILE\}\{current.html\}\{prefix\}+   | Add a navigation menu (prefix is optional)            ||
++addcss\{file.css\}+                    | Include an additional CSS file                            ||
++addjs\{file\}+                         | Include an additional JavaScript file                     ||
++analytics\{G-XXXXXXXXXX\}+             | Add Google Analytics 4 tracking                           ||
++title\{Window Title\}+                 | Override the browser window title                         ||
++nodefaultcss+                          | Don't include the default CSS                             ||
++nofooter+                              | Hide the page footer                                      ||
++nodate+                                | Hide the "last updated" date                              ||
++notime+                                | Show date only (no time) in the footer                    ||
++noeqs+                                 | Disable equation processing and MathJax loading           ||
++fwtitle+                               | Use full-width title (spans above the menu)               ||
++showsource+                            | Add a link to the +.jemdoc+ source in the footer
+~~~
+
+Multiple directives can go on a single line, separated by commas:
+
+~~~
+{}{raw}
+<pre>
+# jemdoc: menu{MENU}{page.html}, analytics{G-XXXXXXXXXX}, showsource
+</pre>
+~~~
+
+== Menu Files
+
+A +MENU+ file defines the navigation sidebar.  Indented lines with +\[link\]+ are menu items; non-indented lines are category headers.
+
+~~~
+{Example MENU file}{jemdoc}
+Category Name
+    Page One        [page1.html]
+    Page Two        [page2.html]
+
+Another Category
+    External Link   [\http://example.com]
+~~~
+
+- The /current page/ is automatically highlighted based on the second argument of the +menu+ directive.
+- Prefix a link with +\\+ to open it in a new tab (useful for external links).
+- Menu items open in the /same tab/ by default (unlike text links, which open in a new tab).
+
+=== Subfolder Pages
+
+For pages in subdirectories, use the third +prefix+ argument:
+
+~~~
+{}{raw}
+<pre>
+# jemdoc: menu{MENU}{}{../}
+</pre>
+~~~
+
+This prepends +..\/+ to each menu link, so they resolve correctly from the subfolder.
+
+== Configuration Files
+
+jemdoc-rs uses a default HTML template that can be partially or fully overridden.  Run +jemdoc-rs \-\-show\-config+ to see all configurable sections.
+
+=== Example Configuration
+
+~~~
+{mysite.conf}{commented}
+# Override the body start to add a favicon
+[bodystart]
+</head>
+<link rel="icon" href="img/icon.png" type="image/x-icon" />
+<body>
+
+# Override the default CSS path
+[defaultcss]
+<link rel="stylesheet" href="/css/jemdoc.css" type="text/css" />
+~~~
+
+Apply with +-c+:
+
+~~~
+{}{sh}
+jemdoc-rs -c mysite.conf *.jemdoc
+~~~
+
+Multiple +-c+ flags can be used; later files take precedence.
+
+=== This Page
+
+This page uses +showsource+---check the footer for a link to its +.jemdoc+ source.

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>jemdoc-rs Documentation</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html" class="current">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>jemdoc-rs</h1>
+</div>
+<p><tt>jemdoc-rs</tt> is a Rust rewrite of <a href="https://github.com/wsshin/jemdoc_mathjax" target="_blank">jemdoc+MathJax</a>, a light text-based markup language for creating static websites.
+</p>
+<p>It converts <tt>.jemdoc</tt> source files into clean, standards-compliant HTML5 pages with built-in support for <a href="mathjax.html" target="_blank">MathJax 4</a>.
+</p>
+<h2>Quick Start</h2>
+<p><a href="https://www.rust-lang.org/tools/install" target="_blank">Rust</a> and Cargo are required to use <tt>jemdoc-rs</tt>.
+</p>
+<div class="codeblock">
+<div class="blockcontent"><pre>
+<span class="comment"># Install</span>
+cargo install --<span class="builtin">git</span> https://github.com/haozhu10015/jemdoc-rs.<span class="builtin">git</span>
+
+<span class="comment"># Convert a single file</span>
+jemdoc-rs index
+
+<span class="comment"># With a configuration file</span>
+jemdoc-rs -c mysite.conf *.jemdoc
+</pre></div></div>
+<h2>Command-Line Options</h2>
+<table>
+<tr class="r1"><td class="c1">Option              </td><td class="c2"> Description                                       </td></tr>
+<tr class="r2"><td class="c1"><tt>-c &lt;file&gt;</tt>         </td><td class="c2"> Use a configuration file                          </td></tr>
+<tr class="r3"><td class="c1"><tt>-o &lt;file&gt;</tt>         </td><td class="c2"> Write output to a specific file or directory      </td></tr>
+<tr class="r4"><td class="c1"><tt>--show-config</tt>   </td><td class="c2"> Print the default configuration template          </td></tr>
+<tr class="r5"><td class="c1"><tt>--version</tt>       </td><td class="c2"> Show version information                          </td></tr>
+<tr class="r6"><td class="c1"><tt>--help</tt>, <tt>-h</tt>    </td><td class="c2"> Show help message
+</td></tr></table>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="index.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

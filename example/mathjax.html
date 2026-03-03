@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>MathJax</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html" class="current">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>MathJax</h1>
+</div>
+<p><tt>jemdoc-rs</tt> uses <a href="https://www.mathjax.org" target="_blank">MathJax 4</a> for math rendering.  MathJax is always included unless the <tt>noeqs</tt> <a href="directives.html" target="_blank">directive</a> is set.
+</p>
+<h2>Inline Math</h2>
+<p>The energy&ndash;mass equivalence \(E = mc^2\) and Euler's identity \(e^{i\pi} + 1 = 0\) are inline equations.
+</p>
+<h2>Display Math</h2>
+<p style="text-align:center">
+\[
+\nabla \times \mathbf{E} = -\frac{\partial\mathbf{B}}{\partial t}
+\]
+</p><h2>Aligned Equations</h2>
+<p>Use LaTeX's <tt>aligned</tt> environment for multi-line equations without numbering:
+</p>
+<p style="text-align:center">
+\[
+\begin{aligned}
+\nabla \cdot \mathbf{D} &amp;= \rho_f\\
+\nabla \cdot \mathbf{B} &amp;= 0\\
+\nabla \times \mathbf{E} &amp;= -\frac{\partial\mathbf{B}}{\partial t}\\
+\nabla \times \mathbf{H} &amp;= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}
+\end{aligned}
+\]
+</p><h2>Numbered Equations</h2>
+<p>Use LaTeX's <tt>equation</tt> environment to number a block as a single equation:
+</p>
+<p style="text-align:center">
+\[
+\begin{equation}
+\begin{aligned}
+\nabla \cdot \mathbf{D} &amp;= \rho_f\\
+\nabla \cdot \mathbf{B} &amp;= 0\\
+\nabla \times \mathbf{E} &amp;= -\frac{\partial\mathbf{B}}{\partial t}\\
+\nabla \times \mathbf{H} &amp;= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}
+\end{aligned}
+\end{equation}
+\]
+</p><p>Use <tt>align</tt> to number each equation individually:
+</p>
+<p style="text-align:center">
+\[
+\begin{align}
+\nabla \cdot \mathbf{D} &amp;= \rho_f\label{eq:D}\\
+\nabla \cdot \mathbf{B} &amp;= 0\label{eq:B}\\
+\nabla \times \mathbf{E} &amp;= -\frac{\partial\mathbf{B}}{\partial t}\label{eq:E}\\
+\nabla \times \mathbf{H} &amp;= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}\label{eq:H}
+\end{align}
+\]
+</p><h2>Cross-Referencing</h2>
+<p>The curl equations are Eqs.&nbsp;\(\eqref{eq:E}\) and \(\eqref{eq:H}\).
+</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="mathjax.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

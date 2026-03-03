@@ -1,0 +1,56 @@
+# jemdoc: menu{MENU}{images.html}, showsource
+= Images
+
+jemdoc-rs supports both inline images and image blocks.
+
+== Inline Images
+
+Use the +\[img\]+ syntax:
+
+~~~
+{}{jemdoc}
+[img{width}{height}{alt text} path/to/image.png]
+~~~
+
+All three brace parameters are optional.  Examples:
+
+~~~
+{}{jemdoc}
+[img{100}{100}{icon} img/favicon-doc.svg]
+[img{200}{}{wide logo} img/favicon-doc.svg]
+[img{}{}{} img/favicon-doc.svg]
+~~~
+
+Here is an inline image: [img{80}{80}{icon} img/favicon-doc.svg]
+
+== Image Blocks
+
+Image blocks place an image alongside descriptive text.  The text flows to the right of the image:
+
+~~~
+{}{jemdoc}
+\~~~
+{}{img_left}{photo.jpg}{alt text}{width}{height}{optional link}
+Description text goes here.
+\~~~
+~~~
+
+=== Example
+
+~~~
+{}{img_left}{img/favicon-doc.svg}{documentation icon}{100}{100}{}
+*jemdoc-rs* is a Rust rewrite of jemdoc\+MathJax.
+
+Image blocks are useful for author photos, project logos, or product screenshots.  The text wraps naturally beside the image.
+
+You can include *formatted text*, /italics/, [http://example.com links], and even equations like $a^2 + b^2 = c^2$.
+~~~
+
+=== Image Block with Link
+
+If the sixth parameter is a URL, the image becomes clickable:
+
+~~~
+{}{img_left}{img/favicon-doc.svg}{documentation icon}{80}{80}{http://github.com/haozhu10015/jemdoc-rs}
+Clicking this image takes you to the jemdoc-rs GitHub repository.
+~~~

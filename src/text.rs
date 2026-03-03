@@ -548,16 +548,13 @@ pub fn br(b: &str, eqs: bool, tableblock: bool, tablerow: &mut usize) -> String 
         let re_colbreak = Regex::new(r"(?ms)(?<!\\)\|").unwrap();
 
         let bcopy = b.clone();
-        b = String::new();
 
+        // Collect all non-empty row segments from all lines (split by || and newlines)
+        let mut all_segments: Vec<String> = Vec::new();
         for line in bcopy.split('\n') {
             if line.is_empty() {
                 continue;
             }
-            *tablerow += 1;
-
-            // Replace || with row breaks
-            let mut processed_line = String::new();
             let mut last_end = 0;
             let mut ss = 0;
             loop {
@@ -566,52 +563,60 @@ pub fn br(b: &str, eqs: bool, tableblock: bool, tablerow: &mut usize) -> String 
                 }
                 match re_rowbreak.find_from_pos(line, ss) {
                     Ok(Some(m)) => {
-                        processed_line.push_str(&line[last_end..m.start()]);
-                        processed_line.push_str(&format!(
-                            "</td></tr>\n<tr class=\"r{}\"><td class=\"c1\">",
-                            tablerow
-                        ));
+                        let seg = &line[last_end..m.start()];
+                        if !seg.is_empty() {
+                            all_segments.push(seg.to_string());
+                        }
                         last_end = m.end();
                         ss = m.end();
                     }
                     _ => break,
                 }
             }
-            processed_line.push_str(&line[last_end..]);
+            let last_seg = &line[last_end..];
+            if !last_seg.is_empty() {
+                all_segments.push(last_seg.to_string());
+            }
+        }
 
-            // Replace | with column breaks
-            let mut final_line = String::new();
+        // Process each row segment: emit row breaks between rows, fresh col counter per row
+        b = String::new();
+        for (row_idx, segment) in all_segments.iter().enumerate() {
+            if row_idx > 0 {
+                *tablerow += 1;
+                b.push_str(&format!(
+                    "</td></tr>\n<tr class=\"r{}\"><td class=\"c1\">",
+                    tablerow
+                ));
+            }
+
+            // Split segment by | into columns with a fresh col counter
             let mut col = 2;
-            let parts: Vec<&str> = {
-                let mut parts = Vec::new();
-                let mut last = 0;
-                let mut ss2 = 0;
-                loop {
-                    if ss2 > processed_line.len() {
-                        break;
-                    }
-                    match re_colbreak.find_from_pos(&processed_line, ss2) {
-                        Ok(Some(m)) => {
-                            parts.push(&processed_line[last..m.start()]);
-                            last = m.end();
-                            ss2 = m.end();
-                        }
-                        _ => break,
-                    }
+            let mut col_parts: Vec<&str> = Vec::new();
+            let mut last2 = 0;
+            let mut ss2 = 0;
+            loop {
+                if ss2 > segment.len() {
+                    break;
                 }
-                parts.push(&processed_line[last..]);
-                parts
-            };
+                match re_colbreak.find_from_pos(segment, ss2) {
+                    Ok(Some(m)) => {
+                        col_parts.push(&segment[last2..m.start()]);
+                        last2 = m.end();
+                        ss2 = m.end();
+                    }
+                    _ => break,
+                }
+            }
+            col_parts.push(&segment[last2..]);
 
-            for (i, part) in parts.iter().enumerate() {
-                final_line.push_str(part);
-                if i < parts.len() - 1 {
-                    final_line.push_str(&format!("</td><td class=\"c{}\">", col));
+            for (i, part) in col_parts.iter().enumerate() {
+                b.push_str(part);
+                if i < col_parts.len() - 1 {
+                    b.push_str(&format!("</td><td class=\"c{}\">", col));
                     col += 1;
                 }
             }
-
-            b.push_str(&final_line);
         }
     }
 

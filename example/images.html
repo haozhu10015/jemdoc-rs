@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Images</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html" class="current">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Images</h1>
+</div>
+<p>jemdoc-rs supports both inline images and image blocks.
+</p>
+<h2>Inline Images</h2>
+<p>Use the <tt>[img]</tt> syntax:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+[img{width}{height}{alt text} path/to/image.png]
+</tt></div></div>
+<p>All three brace parameters are optional.  Examples:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+[img{100}{100}{icon} img/favicon-doc.svg]
+<br />[img{200}{}{wide logo} img/favicon-doc.svg]
+<br />[img{}{}{} img/favicon-doc.svg]
+</tt></div></div>
+<p>Here is an inline image: <img src="img/favicon-doc.svg" width="80px" height="80px" alt="icon" />
+</p>
+<h2>Image Blocks</h2>
+<p>Image blocks place an image alongside descriptive text.  The text flows to the right of the image:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl">{}{img_left}{photo.jpg}{alt text}{width}{height}{optional link}
+<br />Description text goes here.
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl"></tt></div></div>
+<h3>Example</h3>
+<table class="imgtable"><tr><td>
+<img src="img/favicon-doc.svg" alt="documentation icon" width="100px" height="100px" />&nbsp;</td>
+<td align="left"><p><b>jemdoc-rs</b> is a Rust rewrite of jemdoc+MathJax.
+</p>
+<p>Image blocks are useful for author photos, project logos, or product screenshots.  The text wraps naturally beside the image.
+</p>
+<p>You can include <b>formatted text</b>, <i>italics</i>, <a href="http://example.com" target="_blank">links</a>, and even equations like \(a^2 + b^2 = c^2\).
+</p>
+</td></tr></table>
+<h3>Image Block with Link</h3>
+<p>If the sixth parameter is a URL, the image becomes clickable:
+</p>
+<table class="imgtable"><tr><td>
+<a href="http://github.com/haozhu10015/jemdoc-rs"><img src="img/favicon-doc.svg" alt="documentation icon" width="80px" height="80px" /></a>&nbsp;</td>
+<td align="left"><p>Clicking this image takes you to the jemdoc-rs GitHub repository.
+</p>
+</td></tr></table>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="images.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

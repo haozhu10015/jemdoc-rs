@@ -1,0 +1,75 @@
+# jemdoc: menu{MENU}{infoblocks.html}, showsource
+== Info Blocks and Raw HTML
+
+== Info Blocks
+
+Info blocks are used to highlight notes, warnings, or important content.
+
+=== Basic Info Block
+
+~~~
+{}{jemdoc}
+\~~~
+Content goes here.
+\~~~
+~~~
+
+~~~
+This is a basic info block without a title.  Use it for notes, tips, or any content you want to visually separate.
+~~~
+
+=== Info Block with Title
+
+~~~
+{}{jemdoc}
+\~~~
+{Block Title}
+Content goes here.
+\~~~
+~~~
+
+~~~
+{Note}
+This info block has a title.  It supports *bold*, /italic/, +monospace+, and all other inline formatting.
+~~~
+
+~~~
+{Tip}
+Info blocks can contain multiple paragraphs.
+
+You can include equations like $a^2 + b^2 = c^2$, [http://example.com links], and lists inside.
+~~~
+
+~~~
+{Warning}
+Be careful with nested tildes.  If your content starts with +\~+, escape it as +\\\~+ to avoid ending the block prematurely.
+~~~
+
+== Raw HTML
+
+=== Inline Raw HTML
+
+Use double curly braces +\{\{...\}\}+ to embed raw HTML inline:
+
+This text contains {{<span style="color: red; font-weight: bold;">red bold</span>}} and {{<span style="color: blue;">blue</span>}} text, rendered via raw HTML.
+
+You can also use it for {{<abbr title="HyperText Markup Language">HTML</abbr>}} abbreviations.
+
+=== Raw HTML Blocks
+
+Use a code block with the +raw+ language for larger raw HTML sections:
+
+~~~
+{}{raw}
+<div style="display: flex; gap: 10px; margin: 15px 0;">
+  <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 1</strong><br/>Green box with custom styling.
+  </div>
+  <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 2</strong><br/>Blue box with custom styling.
+  </div>
+  <div style="background: #fff3e0; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 3</strong><br/>Orange box with custom styling.
+  </div>
+</div>
+~~~

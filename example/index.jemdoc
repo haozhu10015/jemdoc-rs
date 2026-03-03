@@ -1,0 +1,36 @@
+# jemdoc: menu{MENU}{index.html}
+# jemdoc: title{jemdoc-rs Documentation}
+# jemdoc: showsource
+= jemdoc-rs
+
++jemdoc-rs+ is a Rust rewrite of [https://github.com/wsshin/jemdoc_mathjax jemdoc\+MathJax], a light text-based markup language for creating static websites.
+
+It converts +.jemdoc+ source files into clean, standards-compliant HTML5 pages with built-in support for [mathjax.html MathJax 4].
+
+== Quick Start
+
+[https://www.rust-lang.org/tools/install Rust] and Cargo are required to use +jemdoc-rs+.
+
+~~~
+{}{sh}
+# Install
+cargo install --git https://github.com/haozhu10015/jemdoc-rs.git
+
+# Convert a single file
+jemdoc-rs index
+
+# With a configuration file
+jemdoc-rs -c mysite.conf *.jemdoc
+~~~
+
+== Command-Line Options
+
+~~~
+{}{table}
+Option              | Description                                       ||
++-c <file>+         | Use a configuration file                          ||
++-o <file>+         | Write output to a specific file or directory      ||
++\-\-show-config+   | Print the default configuration template          ||
++\-\-version+       | Show version information                          ||
++\-\-help+, +-h+    | Show help message
+~~~

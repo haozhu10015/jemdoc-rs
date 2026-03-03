@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Lists</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html" class="current">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Lists</h1>
+</div>
+<p><tt>jemdoc-rs</tt> supports unordered, ordered, and definition lists, including nesting.
+</p>
+<h2>Unordered Lists</h2>
+<p>Use <tt>-</tt> to create unordered list items:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+- First item
+<br />- Second item
+<br />- Third item
+</tt></div></div>
+<ul>
+<li><p>First item
+</p>
+</li>
+<li><p>Second item
+</p>
+</li>
+<li><p>Third item
+</p>
+</li>
+</ul>
+<h3>Nested Unordered Lists</h3>
+<p>Use <tt>--</tt> for the second level, <tt>---</tt> for the third:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+- Top level A
+<br />-- Nested A.1
+<br />-- Nested A.2
+<br />--- Deeply nested A.2.1
+<br />--- Deeply nested A.2.2
+<br />- Top level B
+<br />-- Nested B.1
+</tt></div></div>
+<ul>
+<li><p>Top level A
+</p>
+<ul>
+<li><p>Nested A.1
+</p>
+</li>
+<li><p>Nested A.2
+</p>
+<ul>
+<li><p>Deeply nested A.2.1
+</p>
+</li>
+<li><p>Deeply nested A.2.2
+</p>
+</li></ul>
+</li></ul>
+</li>
+<li><p>Top level B
+</p>
+<ul>
+<li><p>Nested B.1
+</p>
+</li>
+</ul>
+
+</li>
+</ul>
+<h2>Ordered Lists</h2>
+<p>Use <tt>.</tt> for ordered (numbered) list items:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+. First step
+<br />. Second step
+<br />. Third step
+</tt></div></div>
+<ol>
+<li><p>First step
+</p>
+</li>
+<li><p>Second step
+</p>
+</li>
+<li><p>Third step
+</p>
+</li>
+</ol>
+<h3>Nested Ordered Lists</h3>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+. Top level step
+<br />.. Sub-step one
+<br />.. Sub-step two
+<br />. Another top level step
+<br />.. Another sub-step
+</tt></div></div>
+<ol>
+<li><p>Top level step
+</p>
+<ol>
+<li><p>Sub-step one
+</p>
+</li>
+<li><p>Sub-step two
+</p>
+</li></ol>
+</li>
+<li><p>Another top level step
+</p>
+<ol>
+<li><p>Another sub-step
+</p>
+</li>
+</ol>
+
+</li>
+</ol>
+<h2>Definition Lists</h2>
+<p>Use <tt>:</tt> with <tt>{term}</tt> for definition lists:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+: {Term One} Definition of term one.
+<br />: {Term Two} Definition of term two.
+</tt></div></div>
+<dl>
+<dt>Term One</dt>
+<dd><p>Definition of term one.  Definitions can contain <b>bold</b>, <i>italic</i>, and <a href="http://example.com" target="_blank">links</a>.
+</p></dd>
+</dl>
+<dl>
+<dt>Term Two</dt>
+<dd><p>Definition of term two.
+</p></dd>
+</dl>
+<dl>
+<dt>\(E = mc^2\)</dt>
+<dd><p>Even equations can be used as definition terms.
+</p></dd>
+</dl>
+<h2>Formatting in Lists</h2>
+<p>List items can contain any inline formatting:
+</p>
+<ul>
+<li><p><b>Bold item</b> with a <a href="http://example.com" target="_blank">link</a>
+</p>
+</li>
+<li><p><i>Italic item</i> with <tt>monospace</tt> and <u>underline</u>
+</p>
+</li>
+<li><p>Item with inline math: \(x^2 + y^2 = r^2\)
+</p>
+</li>
+</ul>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="lists.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

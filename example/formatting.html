@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Text Formatting</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html" class="current">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Text Formatting</h1>
+</div>
+<p><tt>jemdoc-rs</tt> provides several inline formatting options.
+</p>
+<h2>Basic Formatting</h2>
+<div class="codeblock">
+<div class="blocktitle">Markup</div>
+<div class="blockcontent"><tt class="tthl">
+*Bold text*
+<br />/Italic text/
+<br />_Underlined text_
+<br />+Monospace text+
+</tt></div></div>
+<p>Renders as: <b>Bold text</b>, <i>italic text</i>, <u>underlined text</u>, <tt>monospace text</tt>.
+</p>
+<h2>Combining Styles</h2>
+<p>You can nest formatting markers:
+</p>
+<ul>
+<li><p><b><i>Bold italic</i></b>
+</p>
+</li>
+<li><p><b><u>Bold underline</u></b>
+</p>
+</li>
+<li><p><i><u>Italic underline</u></i>
+</p>
+</li>
+<li><p><b><tt>Bold monospace</tt></b>
+</p>
+</li>
+</ul>
+<h2>Special Characters</h2>
+<table>
+<tr class="r1"><td class="c1">Markup      </td><td class="c2"> Renders as    </td><td class="c3"> Description           </td></tr>
+<tr class="r2"><td class="c1"><tt>---</tt>   </td><td class="c2"> &#8201;&mdash;&#8201;           </td><td class="c3"> Em dash               </td></tr>
+<tr class="r3"><td class="c1"><tt>--</tt>     </td><td class="c2"> &ndash;            </td><td class="c3"> En dash               </td></tr>
+<tr class="r4"><td class="c1"><tt>...</tt>   </td><td class="c2"> &hellip;           </td><td class="c3"> Ellipsis              </td></tr>
+<tr class="r5"><td class="c1"><tt>~</tt>       </td><td class="c2"> &nbsp;             </td><td class="c3"> Non-breaking space     </td></tr>
+<tr class="r6"><td class="c1"><tt>\R</tt>      </td><td class="c2"> &reg;            </td><td class="c3"> Registered trademark   </td></tr>
+<tr class="r7"><td class="c1"><tt>\C</tt>      </td><td class="c2"> &copy;            </td><td class="c3"> Copyright              </td></tr>
+<tr class="r8"><td class="c1"><tt>\M</tt>      </td><td class="c2"> &middot;            </td><td class="c3"> Middle dot
+</td></tr></table>
+<h2>Quotes</h2>
+<p><tt>jemdoc-rs</tt> converts straight quotes into typographic (curly) quotes:
+</p>
+<ul>
+<li><p>Double quotes: &ldquo;like this&rdquo;
+</p>
+</li>
+<li><p>Single left quote: &lsquo;like this
+</p>
+</li>
+<li><p>Apostrophe: it's automatic
+</p>
+</li>
+</ul>
+<h2>Escaping</h2>
+<p>Precede any special character with a backslash to output it literally:
+</p>
+<ul>
+<li><p><tt>\*</tt> produces *
+</p>
+</li>
+<li><p><tt>\/</tt> produces /
+</p>
+</li>
+<li><p><tt>\_</tt> produces _
+</p>
+</li>
+<li><p><tt>\+</tt> produces +
+</p>
+</li>
+<li><p><tt>\~</tt> produces ~
+</p>
+</li>
+<li><p><tt>\#</tt> produces #
+</p>
+</li>
+<li><p><tt>\$</tt> produces $
+</p>
+</li>
+<li><p><tt>\\\</tt> produces \
+</p>
+</li>
+</ul>
+<h2>Monospace with Percent Signs</h2>
+<p>Use percent signs for monospace that preserves special characters inside:
+</p>
+<p><tt>%&lt;div class=&ldquo;example&rdquo;&gt;%</tt> renders as: <tt>&lt;div class="example"&gt;</tt>
+</p>
+<h2>Line Breaks and Paragraph Breaks</h2>
+<p>A backslash-n (\n) forces a line break within a paragraph.<br />
+Like this.
+</p>
+<p>A backslash-p (\p) forces a new paragraph mid-block.</p><p>
+Like this&#8201;&mdash;&#8201;a new paragraph without blank lines in the source.
+</p>
+<h2>Comments</h2>
+<p>Lines starting with <tt>#</tt> are comments and do not appear in the output:
+</p>
+<p>The line above this paragraph is a comment in the source.
+</p>
+<h2>Headings</h2>
+<p>jemdoc-rs supports four levels of headings using <tt>=</tt> signs:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+= Page Title (H1)
+<br />== Section (H2)
+<br />=== Subsection (H3)
+<br />==== Sub-subsection (H4)
+<br /></tt></div></div>
+<h1>This is H1</h1>
+<h2>This is H2</h2>
+<h3>This is H3</h3>
+<h4>This is H4</h4>
+<p>In a <tt>.jemdoc</tt> source, if some level of headings is used directly after the <tt># jemdoc:</tt> <a href="directives.html" target="_blank">configurations</a> without blank lines, it will also sets the browser window title unless overridden by the <tt>title</tt> directive.
+</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="formatting.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

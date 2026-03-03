@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Header Directives and Configuration</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html" class="current">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Header Directives and Configuration</h1>
+</div>
+<h2>Header Directives</h2>
+<p>Directives are placed at the top of a <tt>.jemdoc</tt> file as special comments.  They control page-level settings.
+</p>
+<pre>
+# jemdoc: menu{MENU}{thispage.html}
+# jemdoc: addcss{custom.css}
+# jemdoc: title{Custom Window Title}
+</pre>
+<h3>Available Directives</h3>
+<table id="directives-table">
+<tr class="r1"><td class="c1">Directive                               </td><td class="c2"> Description                                               </td></tr>
+<tr class="r2"><td class="c1"><tt>menu{FILE}{current.html}{prefix}</tt>   </td><td class="c2"> Add a navigation menu (prefix is optional)            </td></tr>
+<tr class="r3"><td class="c1"><tt>addcss{file.css}</tt>                    </td><td class="c2"> Include an additional CSS file                            </td></tr>
+<tr class="r4"><td class="c1"><tt>addjs{file}</tt>                         </td><td class="c2"> Include an additional JavaScript file                     </td></tr>
+<tr class="r5"><td class="c1"><tt>analytics{G-XXXXXXXXXX}</tt>             </td><td class="c2"> Add Google Analytics 4 tracking                           </td></tr>
+<tr class="r6"><td class="c1"><tt>title{Window Title}</tt>                 </td><td class="c2"> Override the browser window title                         </td></tr>
+<tr class="r7"><td class="c1"><tt>nodefaultcss</tt>                          </td><td class="c2"> Don't include the default CSS                             </td></tr>
+<tr class="r8"><td class="c1"><tt>nofooter</tt>                              </td><td class="c2"> Hide the page footer                                      </td></tr>
+<tr class="r9"><td class="c1"><tt>nodate</tt>                                </td><td class="c2"> Hide the &ldquo;last updated&rdquo; date                              </td></tr>
+<tr class="r10"><td class="c1"><tt>notime</tt>                                </td><td class="c2"> Show date only (no time) in the footer                    </td></tr>
+<tr class="r11"><td class="c1"><tt>noeqs</tt>                                 </td><td class="c2"> Disable equation processing and MathJax loading           </td></tr>
+<tr class="r12"><td class="c1"><tt>fwtitle</tt>                               </td><td class="c2"> Use full-width title (spans above the menu)               </td></tr>
+<tr class="r13"><td class="c1"><tt>showsource</tt>                            </td><td class="c2"> Add a link to the <tt>.jemdoc</tt> source in the footer
+</td></tr></table>
+<p>Multiple directives can go on a single line, separated by commas:
+</p>
+<pre>
+# jemdoc: menu{MENU}{page.html}, analytics{G-XXXXXXXXXX}, showsource
+</pre>
+<h2>Menu Files</h2>
+<p>A <tt>MENU</tt> file defines the navigation sidebar.  Indented lines with <tt>[link]</tt> are menu items; non-indented lines are category headers.
+</p>
+<div class="codeblock">
+<div class="blocktitle">Example MENU file</div>
+<div class="blockcontent"><tt class="tthl">
+Category Name
+<br />    Page One        [page1.html]
+<br />    Page Two        [page2.html]
+
+<br />Another Category
+<br />    External Link   [\http://example.com]
+</tt></div></div>
+<ul>
+<li><p>The <i>current page</i> is automatically highlighted based on the second argument of the <tt>menu</tt> directive.
+</p>
+</li>
+<li><p>Prefix a link with <tt>\</tt> to open it in a new tab (useful for external links).
+</p>
+</li>
+<li><p>Menu items open in the <i>same tab</i> by default (unlike text links, which open in a new tab).
+</p>
+</li>
+</ul>
+<h3>Subfolder Pages</h3>
+<p>For pages in subdirectories, use the third <tt>prefix</tt> argument:
+</p>
+<pre>
+# jemdoc: menu{MENU}{}{../}
+</pre>
+<p>This prepends <tt>../</tt> to each menu link, so they resolve correctly from the subfolder.
+</p>
+<h2>Configuration Files</h2>
+<p>jemdoc-rs uses a default HTML template that can be partially or fully overridden.  Run <tt>jemdoc-rs --show-config</tt> to see all configurable sections.
+</p>
+<h3>Example Configuration</h3>
+<div class="codeblock">
+<div class="blocktitle">mysite.conf</div>
+<div class="blockcontent"><pre>
+<span class="comment"># Override the body start to add a favicon</span>
+[bodystart]
+&lt;/head&gt;
+&lt;link rel="icon" href="img/icon.png" type="image/x-icon" /&gt;
+&lt;body&gt;
+
+<span class="comment"># Override the default CSS path</span>
+[defaultcss]
+&lt;link rel="stylesheet" href="/css/jemdoc.css" type="text/css" /&gt;
+</pre></div></div>
+<p>Apply with <tt>-c</tt>:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><pre>
+jemdoc-rs -c mysite.conf *.jemdoc
+</pre></div></div>
+<p>Multiple <tt>-c</tt> flags can be used; later files take precedence.
+</p>
+<h3>This Page</h3>
+<p>This page uses <tt>showsource</tt>&#8201;&mdash;&#8201;check the footer for a link to its <tt>.jemdoc</tt> source.
+</p>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="directives.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

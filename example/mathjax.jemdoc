@@ -1,0 +1,57 @@
+# jemdoc: menu{MENU}{mathjax.html}, showsource
+= MathJax
+
++jemdoc-rs+ uses [https://www.mathjax.org MathJax 4] for math rendering.  MathJax is always included unless the +noeqs+ [directives.html directive] is set.
+
+== Inline Math
+
+The energy--mass equivalence $E = mc^2$ and Euler's identity $e^{i\pi} + 1 = 0$ are inline equations.
+
+== Display Math
+
+\(
+\nabla \times \mathbf{E} = -\frac{\partial\mathbf{B}}{\partial t}
+\)
+
+== Aligned Equations
+
+Use LaTeX's +aligned+ environment for multi-line equations without numbering:
+
+\(
+\begin{aligned}
+\nabla \cdot \mathbf{D} &= \rho_f\\
+\nabla \cdot \mathbf{B} &= 0\\
+\nabla \times \mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t}\\
+\nabla \times \mathbf{H} &= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}
+\end{aligned}
+\)
+
+== Numbered Equations
+
+Use LaTeX's +equation+ environment to number a block as a single equation:
+
+\(
+\begin{equation}
+\begin{aligned}
+\nabla \cdot \mathbf{D} &= \rho_f\\
+\nabla \cdot \mathbf{B} &= 0\\
+\nabla \times \mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t}\\
+\nabla \times \mathbf{H} &= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}
+\end{aligned}
+\end{equation}
+\)
+
+Use +align+ to number each equation individually:
+
+\(
+\begin{align}
+\nabla \cdot \mathbf{D} &= \rho_f\label{eq:D}\\
+\nabla \cdot \mathbf{B} &= 0\label{eq:B}\\
+\nabla \times \mathbf{E} &= -\frac{\partial\mathbf{B}}{\partial t}\label{eq:E}\\
+\nabla \times \mathbf{H} &= \mathbf{J}_f + \frac{\partial\mathbf{D}}{\partial t}\label{eq:H}
+\end{align}
+\)
+
+== Cross-Referencing
+
+The curl equations are Eqs.~$\eqref{eq:E}$ and $\eqref{eq:H}$.

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Info Blocks and Raw HTML</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html" class="current">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Info Blocks and Raw HTML</h1>
+</div>
+<h2>Info Blocks</h2>
+<p>Info blocks are used to highlight notes, warnings, or important content.
+</p>
+<h3>Basic Info Block</h3>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl">Content goes here.
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl"></tt></div></div>
+<div class="infoblock">
+<div class="blockcontent">
+<p>This is a basic info block without a title.  Use it for notes, tips, or any content you want to visually separate.
+</p>
+</div></div>
+<h3>Info Block with Title</h3>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl">{Block Title}
+<br />Content goes here.
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl"></tt></div></div>
+<div class="infoblock">
+<div class="blocktitle">Note</div>
+<div class="blockcontent">
+<p>This info block has a title.  It supports <b>bold</b>, <i>italic</i>, <tt>monospace</tt>, and all other inline formatting.
+</p>
+</div></div>
+<div class="infoblock">
+<div class="blocktitle">Tip</div>
+<div class="blockcontent">
+<p>Info blocks can contain multiple paragraphs.
+</p>
+<p>You can include equations like \(a^2 + b^2 = c^2\), <a href="http://example.com" target="_blank">links</a>, and lists inside.
+</p>
+</div></div>
+<div class="infoblock">
+<div class="blocktitle">Warning</div>
+<div class="blockcontent">
+<p>Be careful with nested tildes.  If your content starts with <tt>~</tt>, escape it as <tt>\~</tt> to avoid ending the block prematurely.
+</p>
+</div></div>
+<h2>Raw HTML</h2>
+<h3>Inline Raw HTML</h3>
+<p>Use double curly braces <tt>{{&hellip;}}</tt> to embed raw HTML inline:
+</p>
+<p>This text contains <span style="color: red; font-weight: bold;">red bold</span> and <span style="color: blue;">blue</span> text, rendered via raw HTML.
+</p>
+<p>You can also use it for <abbr title="HyperText Markup Language">HTML</abbr> abbreviations.
+</p>
+<h3>Raw HTML Blocks</h3>
+<p>Use a code block with the <tt>raw</tt> language for larger raw HTML sections:
+</p>
+<div style="display: flex; gap: 10px; margin: 15px 0;">
+  <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 1</strong><br/>Green box with custom styling.
+  </div>
+  <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 2</strong><br/>Blue box with custom styling.
+  </div>
+  <div style="background: #fff3e0; padding: 15px; border-radius: 5px; flex: 1;">
+    <strong>Box 3</strong><br/>Orange box with custom styling.
+  </div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:23 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="infoblocks.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

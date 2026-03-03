@@ -1,0 +1,98 @@
+# jemdoc: menu{MENU}{lists.html}, showsource
+= Lists
+
++jemdoc-rs+ supports unordered, ordered, and definition lists, including nesting.
+
+== Unordered Lists
+
+Use +-+ to create unordered list items:
+
+~~~
+{}{jemdoc}
+- First item
+- Second item
+- Third item
+~~~
+
+- First item
+- Second item
+- Third item
+
+=== Nested Unordered Lists
+
+Use +\-\-+ for the second level, +\-\-\-+ for the third:
+
+~~~
+{}{jemdoc}
+- Top level A
+-- Nested A.1
+-- Nested A.2
+--- Deeply nested A.2.1
+--- Deeply nested A.2.2
+- Top level B
+-- Nested B.1
+~~~
+
+- Top level A
+-- Nested A.1
+-- Nested A.2
+--- Deeply nested A.2.1
+--- Deeply nested A.2.2
+- Top level B
+-- Nested B.1
+
+== Ordered Lists
+
+Use +\.+ for ordered (numbered) list items:
+
+~~~
+{}{jemdoc}
+. First step
+. Second step
+. Third step
+~~~
+
+. First step
+. Second step
+. Third step
+
+=== Nested Ordered Lists
+
+~~~
+{}{jemdoc}
+. Top level step
+.. Sub-step one
+.. Sub-step two
+. Another top level step
+.. Another sub-step
+~~~
+
+. Top level step
+.. Sub-step one
+.. Sub-step two
+. Another top level step
+.. Another sub-step
+
+== Definition Lists
+
+Use +\:+ with +\{term\}+ for definition lists:
+
+~~~
+{}{jemdoc}
+: {Term One} Definition of term one.
+: {Term Two} Definition of term two.
+~~~
+
+: {Term One} Definition of term one.  Definitions can contain *bold*, /italic/, and [http://example.com links].
+
+: {Term Two} Definition of term two.
+
+: {$E = mc^2$} Even equations can be used as definition terms.
+
+== Formatting in Lists
+
+List items can contain any inline formatting:
+
+- *Bold item* with a [http://example.com link]
+- /Italic item/ with +monospace+ and _underline_
+- Item with inline math: $x^2 + y^2 = r^2$

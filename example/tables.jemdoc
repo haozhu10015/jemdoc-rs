@@ -1,0 +1,48 @@
+# jemdoc: menu{MENU}{tables.html}, showsource
+= Tables
+
+Tables are created inside +\~\~\~+ blocks with the +table+ keyword.
+
+== Basic Table
+
+~~~
+{}{jemdoc}
+\~~~
+{}{table}
+Cell 1  | Cell 2  | Cell 3 ||
+Row 2   | Cell 5  | Cell 6
+\~~~
+~~~
+
+~~~
+{}{table}
+Cell 1  | Cell 2  | Cell 3  ||
+Row 2   | Cell 5  | Cell 6
+~~~
+
+Use +\|+ to separate columns and +\|\|+ for row breaks.
+
+== Table with ID
+
+You can give a table an HTML +id+ attribute for styling or linking:
+
+~~~
+{}{jemdoc}
+\~~~
+{}{table}{my-table-id}
+Header A | Header B ||
+Value A  | Value B
+\~~~
+~~~
+
+== Table with Formatted Content
+
+Tables support inline formatting within cells:
+
+~~~
+{}{table}
+*Header 1*      | *Header 2*            | *Header 3*            ||
+/Italic/        | +monospace+           | _underline_           ||
+$x^2$           | $\sqrt{2}$            | $\pi \approx 3.14$   ||
+[http://example.com/]  | [http://example.com/ link B]      | plain text
+~~~

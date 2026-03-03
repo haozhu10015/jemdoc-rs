@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="jemdoc-rs, see https://github.com/haozhu10015/jemdoc-rs" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Code Blocks</title>
+<!-- MathJax -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    tags: 'ams'
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+</script>
+<!-- End MathJax -->
+</head>
+<link rel="icon" href="img/favicon-jr.svg" type="image/svg+xml" />
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">jemdoc-rs</div>
+<div class="menu-item"><a href="index.html">Overview</a></div>
+<div class="menu-category">Markup</div>
+<div class="menu-item"><a href="formatting.html">Formatting</a></div>
+<div class="menu-item"><a href="lists.html">Lists</a></div>
+<div class="menu-item"><a href="link.html">Links</a></div>
+<div class="menu-item"><a href="images.html">Images</a></div>
+<div class="menu-item"><a href="mathjax.html">Equations</a></div>
+<div class="menu-category">Blocks</div>
+<div class="menu-item"><a href="codeblocks.html" class="current">Code&nbsp;Blocks</a></div>
+<div class="menu-item"><a href="tables.html">Tables</a></div>
+<div class="menu-item"><a href="infoblocks.html">Info&nbsp;Blocks</a></div>
+<div class="menu-category">Configuration</div>
+<div class="menu-item"><a href="directives.html">Directives</a></div>
+<div class="menu-item"><a href="http://www.google.com" target="_blank">Open&nbsp;in&nbsp;New&nbsp;Tab</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Code Blocks</h1>
+</div>
+<p>Code blocks are delimited by <tt>~~~</tt> and support syntax highlighting for several languages.
+</p>
+<h2>Basic Syntax</h2>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl">{Optional Title}{language}
+<br />code here
+</tt><pre class="tthl">~~~
+</pre><tt class="tthl"></tt></div></div>
+<p>The first brace pair is an optional title, the second is the language for highlighting.
+</p>
+<h2>Python</h2>
+<div class="codeblock">
+<div class="blocktitle">Hello World</div>
+<div class="blockcontent"><pre>
+<span class="statement">import</span> numpy <span class="statement">as</span> np
+
+<span class="statement">def</span> greet(name):
+    <span class="comment"># Say hello to someone.</span>
+    <span class="statement">print</span>(f<span class="string">"Hello, {name}!"</span>)
+    <span class="statement">return</span> <span class="builtin">True</span>
+
+<span class="comment"># Create an array <span class="builtin">and</span> call the function</span>
+x = np.array([1, 2, 3])
+greet(<span class="string">"world"</span>)
+</pre></div></div>
+<h2>C++</h2>
+<div class="codeblock">
+<div class="blocktitle">Fibonacci</div>
+<div class="blockcontent"><pre>
+<span class="operator">#include &lt;iostream&gt;</span>
+
+<span class="builtin">int</span> fibonacci(<span class="builtin">int</span> n) {
+    <span class="statement">if</span> (n &lt;= 1) <span class="statement">return</span> n;
+    <span class="statement">return</span> fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+<span class="builtin">int</span> main() {
+    <span class="statement">for</span> (<span class="builtin">int</span> i = 0; i &lt; 10; i++) {
+        std::cout <span class="operator">&lt;&lt;</span> fibonacci(i) <span class="operator">&lt;&lt;</span> " ";
+    }
+    <span class="statement">return</span> 0;
+}
+</pre></div></div>
+<h2>Shell</h2>
+<div class="codeblock">
+<div class="blocktitle">Build and install</div>
+<div class="blockcontent"><pre>
+<span class="comment"># Clone the repository</span>
+<span class="builtin">git</span> clone https://github.com/haozhu10015/jemdoc-rs.<span class="builtin">git</span>
+<span class="statement">cd</span> jemdoc-rs
+
+<span class="comment"># Build and install</span>
+cargo install --path .
+
+<span class="comment"># Convert jemdoc files</span>
+jemdoc-rs -c mysite.conf *.jemdoc
+
+<span class="builtin">echo</span> <span class="string">"Done!"</span>
+</pre></div></div>
+<h2>Ruby</h2>
+<div class="codeblock">
+<div class="blocktitle">Ruby example</div>
+<div class="blockcontent"><pre>
+<span class="statement">class</span> Greeter
+  <span class="statement">def</span> initialize(name)
+    @name = name
+  <span class="statement">end</span>
+
+  <span class="statement">def</span> greet
+    puts <span class="string">"Hello, world!"</span>
+  <span class="statement">end</span>
+<span class="statement">end</span>
+
+Greeter.new(<span class="string">"world"</span>).greet
+</pre></div></div>
+<h2>MATLAB</h2>
+<div class="codeblock">
+<div class="blocktitle">MATLAB example</div>
+<div class="blockcontent"><pre>
+<span class="comment">% Generate random data</span>
+x = <span class="statement">randn</span>(1, 100);
+y = <span class="statement">cumsum</span>(x);
+
+<span class="comment">% Find the maximum</span>
+[val, idx] = <span class="statement">max</span>(y);
+<span class="statement">help</span> <span class="statement">cumsum</span>
+</pre></div></div>
+<h2>Rust</h2>
+<div class="codeblock">
+<div class="blocktitle">Fibonacci</div>
+<div class="blockcontent"><pre>
+<span class="statement">use</span> std::collections::HashMap;
+
+<span class="statement">fn</span> fibonacci(n: <span class="builtin">u64</span>, memo: &amp;<span class="statement">mut</span> HashMap&lt;<span class="builtin">u64</span>, <span class="builtin">u64</span>&gt;) -&gt; <span class="builtin">u64</span> {
+    <span class="statement">if</span> n &lt;= 1 {
+        <span class="statement">return</span> n;
+    }
+    <span class="statement">if</span> <span class="statement">let</span> <span class="builtin">Some</span>(&amp;val) = memo.get(&amp;n) {
+        <span class="statement">return</span> val;
+    }
+    <span class="statement">let</span> result = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+    memo.insert(n, result);
+    result
+}
+
+<span class="statement">fn</span> main() {
+    <span class="statement">let</span> <span class="statement">mut</span> memo = HashMap::new();
+    <span class="statement">for</span> i <span class="statement">in</span> 0..10 {
+        println!(<span class="string">"fib({}) = {}"</span>, i, fibonacci(i, &amp;<span class="statement">mut</span> memo));
+    }
+}
+</pre></div></div>
+<h2>jemdoc Syntax</h2>
+<p>Use the <tt>jemdoc</tt> language for jemdoc source highlighting.  It renders in a monospace font with special handling for jemdoc markers:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><tt class="tthl">
+</tt><pre class="tthl"># jemdoc: menu{MENU}{index.html}
+</pre><tt class="tthl">== My Page Title
+<br />
+<br />- A list item
+<br />- Another item
+
+<br />: {Term} Definition here.
+</tt></div></div>
+<h2>Python Interactive</h2>
+<p>The <tt>pyint</tt> language highlights Python interactive sessions:
+</p>
+<div class="codeblock">
+<div class="blocktitle">Python REPL</div>
+<div class="blockcontent"><pre>
+<span class="pycommand">&gt;&gt;&gt; import math</span>
+<span class="pycommand">&gt;&gt;&gt; math.sqrt(144)</span>
+12.0
+<span class="pycommand">&gt;&gt;&gt; print("Hello!")</span>
+Hello!
+</pre></div></div>
+<h2>Raw Blocks</h2>
+<p>Use <tt>{}{raw}</tt> to output content verbatim with no wrapping or highlighting:
+</p>
+<div style="background: #f0f8ff; padding: 15px; border: 1px solid #b0d4f1; border-radius: 5px; margin: 10px 0;">
+  <strong>Custom HTML block</strong><br/>
+  This content passes through without any jemdoc processing.
+  Useful for embedding widgets, iframes, or complex HTML layouts.
+</div>
+<h2>Code Block Without Title</h2>
+<p>Omit the title to get an untitled code block:
+</p>
+<div class="codeblock">
+<div class="blockcontent"><pre>
+<span class="statement">print</span>(<span class="string">"No title on this block"</span>)
+</pre></div></div>
+<h2>Supported Languages</h2>
+<table>
+<tr class="r1"><td class="c1">Language        </td><td class="c2"> Aliases           </td></tr>
+<tr class="r2"><td class="c1">Python          </td><td class="c2"> <tt>python</tt>, <tt>py</tt>   </td></tr>
+<tr class="r3"><td class="c1">C               </td><td class="c2"> <tt>c</tt>              </td></tr>
+<tr class="r4"><td class="c1">C++          </td><td class="c2"> <tt>c++</tt>, <tt>cpp</tt>   </td></tr>
+<tr class="r5"><td class="c1">Ruby            </td><td class="c2"> <tt>ruby</tt>, <tt>rb</tt>     </td></tr>
+<tr class="r6"><td class="c1">Rust            </td><td class="c2"> <tt>rust</tt>, <tt>rs</tt>     </td></tr>
+<tr class="r7"><td class="c1">Shell           </td><td class="c2"> <tt>sh</tt>             </td></tr>
+<tr class="r8"><td class="c1">MATLAB          </td><td class="c2"> <tt>matlab</tt>         </td></tr>
+<tr class="r9"><td class="c1">Commented       </td><td class="c2"> <tt>commented</tt>      </td></tr>
+<tr class="r10"><td class="c1">jemdoc          </td><td class="c2"> <tt>jemdoc</tt>         </td></tr>
+<tr class="r11"><td class="c1">Python REPL     </td><td class="c2"> <tt>pyint</tt>          </td></tr>
+<tr class="r12"><td class="c1">Raw HTML        </td><td class="c2"> <tt>raw</tt>
+</td></tr></table>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-03-03 18:19:22 CET, by <a href="https://github.com/haozhu10015/jemdoc-rs" target="_blank">jemdoc-rs</a>.
+(<a href="codeblocks.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

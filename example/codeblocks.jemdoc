@@ -1,0 +1,192 @@
+# jemdoc: menu{MENU}{codeblocks.html}, showsource
+= Code Blocks
+
+Code blocks are delimited by +\~\~\~+ and support syntax highlighting for several languages.
+
+== Basic Syntax
+
+~~~
+{}{jemdoc}
+\~~~
+{Optional Title}{language}
+code here
+\~~~
+~~~
+
+The first brace pair is an optional title, the second is the language for highlighting.
+
+== Python
+
+~~~
+{Hello World}{python}
+import numpy as np
+
+def greet(name):
+    # Say hello to someone.
+    print(f"Hello, {name}!")
+    return True
+
+# Create an array and call the function
+x = np.array([1, 2, 3])
+greet("world")
+~~~
+
+== C\+\+
+
+~~~
+{Fibonacci}{c++}
+#include <iostream>
+
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    for (int i = 0; i < 10; i++) {
+        std::cout << fibonacci(i) << " ";
+    }
+    return 0;
+}
+~~~
+
+== Shell
+
+~~~
+{Build and install}{sh}
+# Clone the repository
+git clone https://github.com/haozhu10015/jemdoc-rs.git
+cd jemdoc-rs
+
+# Build and install
+cargo install --path .
+
+# Convert jemdoc files
+jemdoc-rs -c mysite.conf *.jemdoc
+
+echo "Done!"
+~~~
+
+== Ruby
+
+~~~
+{Ruby example}{ruby}
+class Greeter
+  def initialize(name)
+    @name = name
+  end
+
+  def greet
+    puts "Hello, world!"
+  end
+end
+
+Greeter.new("world").greet
+~~~
+
+== MATLAB
+
+~~~
+{MATLAB example}{matlab}
+% Generate random data
+x = randn(1, 100);
+y = cumsum(x);
+
+% Find the maximum
+[val, idx] = max(y);
+help cumsum
+~~~
+
+== Rust
+
+~~~
+{Fibonacci}{rust}
+use std::collections::HashMap;
+
+fn fibonacci(n: u64, memo: &mut HashMap<u64, u64>) -> u64 {
+    if n <= 1 {
+        return n;
+    }
+    if let Some(&val) = memo.get(&n) {
+        return val;
+    }
+    let result = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+    memo.insert(n, result);
+    result
+}
+
+fn main() {
+    let mut memo = HashMap::new();
+    for i in 0..10 {
+        println!("fib({}) = {}", i, fibonacci(i, &mut memo));
+    }
+}
+~~~
+
+== jemdoc Syntax
+
+Use the +jemdoc+ language for jemdoc source highlighting.  It renders in a monospace font with special handling for jemdoc markers:
+
+~~~
+{}{jemdoc}
+# jemdoc: menu{MENU}{index.html}
+== My Page Title
+
+- A list item
+- Another item
+
+: {Term} Definition here.
+~~~
+
+== Python Interactive
+
+The +pyint+ language highlights Python interactive sessions:
+
+~~~
+{Python REPL}{pyint}
+>>> import math
+>>> math.sqrt(144)
+12.0
+>>> print("Hello!")
+Hello!
+~~~
+
+== Raw Blocks
+
+Use +\{}{raw}+ to output content verbatim with no wrapping or highlighting:
+
+~~~
+{}{raw}
+<div style="background: #f0f8ff; padding: 15px; border: 1px solid #b0d4f1; border-radius: 5px; margin: 10px 0;">
+  <strong>Custom HTML block</strong><br/>
+  This content passes through without any jemdoc processing.
+  Useful for embedding widgets, iframes, or complex HTML layouts.
+</div>
+~~~
+
+== Code Block Without Title
+
+Omit the title to get an untitled code block:
+
+~~~
+{}{python}
+print("No title on this block")
+~~~
+
+== Supported Languages
+
+~~~
+{}{table}
+Language        | Aliases           ||
+Python          | +python+, +py+   ||
+C               | +c+              ||
+C\+\+          | +c\+\++, +cpp+   ||
+Ruby            | +ruby+, +rb+     ||
+Rust            | +rust+, +rs+     ||
+Shell           | +sh+             ||
+MATLAB          | +matlab+         ||
+Commented       | +commented+      ||
+jemdoc          | +jemdoc+         ||
+Python REPL     | +pyint+          ||
+Raw HTML        | +raw+
+~~~
