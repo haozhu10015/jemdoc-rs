@@ -1005,7 +1005,12 @@ impl JemdocParser {
 
                         self.out("<table class=\"imgtable\"><tr><td>\n");
                         if !g[6].is_empty() {
-                            self.out(&format!("<a href=\"{}\">", g[6]));
+                            let (target, href) = if g[6].starts_with('/') {
+                                ("", g[6][1..].to_string())
+                            } else {
+                                (" target=\"_blank\"", g[6].clone())
+                            };
+                            self.out(&format!("<a href=\"{}\"{}>", href, target));
                         }
                         self.out(&format!("<img src=\"{}\"", g[2]));
                         self.out(&format!(" alt=\"{}\"", g[3]));
