@@ -102,6 +102,33 @@ jobs:
       - name: Check build with MSRV
         run: cargo check --all-features
 
+  example-snapshots:
+    name: Example Snapshot Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build jemdoc-rs
+        run: cargo build --release
+
+      - name: Regenerate example HTML
+        working-directory: example
+        run: ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
+
+      - name: Check for snapshot drift
+        run: |
+          git diff --exit-code -- example/*.html || {
+            echo ""
+            echo "Example HTML is out of date. Regenerate with:"
+            echo "  cd example && jemdoc-rs -c mysite.conf *.jemdoc"
+            exit 1
+          }
+
   publish-dry-run:
     name: Publish Dry Run
     runs-on: ubuntu-latest
