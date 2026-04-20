@@ -2,6 +2,13 @@
 name = "jemdoc-rs"
 version = "0.7.3"
 edition = "2024"
+description = "A Rust rewrite of jemdoc, a light text-based markup language for creating static websites."
+license = "Apache-2.0"
+repository = "https://github.com/haozhu10015/jemdoc-rs"
+documentation = "https://docs.rs/jemdoc-rs"
+rust-version = "1.87"
+keywords = ["jemdoc", "markup", "static-site", "html", "mathjax"]
+categories = ["command-line-utilities", "text-processing", "template-engine"]
 
 [dependencies]
 fancy-regex = "0.14"
