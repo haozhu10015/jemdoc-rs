@@ -1002,7 +1002,7 @@ impl JemdocParser {
         }
 
         // Footer
-        if show_footer && (show_last_updated || show_source_link) {
+        if show_footer {
             let footerstart = self.conf("footerstart");
             self.out(&footerstart);
 
@@ -1034,6 +1034,9 @@ impl JemdocParser {
                 };
                 let lastupdated = self.conf("lastupdated");
                 self.hb(&lastupdated, &s, None, None);
+            } else {
+                let generatedby = self.conf("generatedby");
+                self.out(&generatedby);
             }
 
             if show_source_link {
