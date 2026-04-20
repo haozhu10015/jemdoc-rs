@@ -44,11 +44,14 @@ jobs:
       - name: Build release binary
         run: cargo build --release --target ${{ matrix.target }}
 
+      - name: Rename binary
+        run: cp target/${{ matrix.target }}/release/${{ matrix.binary }} ${{ matrix.asset }}
+
       - name: Upload binary
         uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.asset }}
-          path: target/${{ matrix.target }}/release/${{ matrix.binary }}
+          path: ${{ matrix.asset }}
           if-no-files-found: error
 
   release:
@@ -65,15 +68,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: artifacts
-
-      - name: Rename artifacts
-        run: |
-          for dir in artifacts/*/; do
-            name=$(basename "$dir")
-            binary=$(ls "$dir")
-            mv "$dir$binary" "artifacts/$name"
-            rmdir "$dir"
-          done
+          merge-multiple: true
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v3
