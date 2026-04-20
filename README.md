@@ -8,13 +8,17 @@ A Rust rewrite of [jemdoc+MathJax](https://github.com/wsshin/jemdoc_mathjax), a 
 
 ### Using `cargo install`
 
-Requires [Rust](https://www.rust-lang.org/tools/install) 1.85 or later.
+Requires [Rust](https://www.rust-lang.org/tools/install) 1.87 or later.
 
 ```sh
-cargo install --git https://github.com/haozhu10015/jemdoc-rs.git
+cargo install jemdoc-rs
 ```
 
-This installs `jemdoc-rs` to `~/.cargo/bin/`, which is typically already on your `PATH`. You only need to do this once (or re-run to update).
+This installs `jemdoc-rs` to `~/.cargo/bin/`, which is typically already on your `PATH`. You only need to do this once. To update to the latest version, run the same command again.
+
+### Pre-built Binaries
+
+Pre-built binaries for Linux, macOS, and Windows are available on the [releases page](https://github.com/haozhu10015/jemdoc-rs/releases).
 
 ### Building from Source
 
