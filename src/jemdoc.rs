@@ -1008,28 +1008,11 @@ impl JemdocParser {
 
             if show_last_updated {
                 let s = {
-                    let fmt = if show_last_updated_time {
-                        "%Y-%m-%d %H:%M:%S %Z\0"
+                    let now = jiff::Zoned::now();
+                    if show_last_updated_time {
+                        now.strftime("%Y-%m-%d %H:%M:%S %Z").to_string()
                     } else {
-                        "%Y-%m-%d\0"
-                    };
-                    unsafe {
-                        let mut t: libc::time_t = 0;
-                        libc::time(&mut t);
-                        let tm = libc::localtime(&t);
-                        let mut buf = [0u8; 128];
-                        let len = libc::strftime(
-                            buf.as_mut_ptr() as *mut libc::c_char,
-                            buf.len(),
-                            fmt.as_ptr() as *const libc::c_char,
-                            tm,
-                        );
-                        if len > 0 {
-                            String::from_utf8_lossy(&buf[..len]).to_string()
-                        } else {
-                            let now = chrono::Local::now();
-                            now.format("%Y-%m-%d %H:%M:%S").to_string()
-                        }
+                        now.strftime("%Y-%m-%d").to_string()
                     }
                 };
                 let lastupdated = self.conf("lastupdated");

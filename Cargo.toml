@@ -12,5 +12,4 @@ categories = ["command-line-utilities", "text-processing", "template-engine"]
 
 [dependencies]
 fancy-regex = "0.17"
-chrono = "0.4"
-libc = "0.2"
+jiff = "0.2"
