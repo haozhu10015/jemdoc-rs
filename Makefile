@@ -42,7 +42,7 @@ release: ## tag and push a release from the version in Cargo.toml
 	@VERSION=$$(grep '^version' Cargo.toml | head -1 | sed 's/.*= *"\(.*\)"/\1/'); \
 	TAG="v$$VERSION"; \
 	printf "$(BLUE)Tagging $$TAG$(RESET)\n"; \
-	git tag "$$TAG" && git push --tags
+	git tag -a "$$TAG" -m "$$TAG" && git push --tags
 
 publish-check: ## verify the package can be published
 	@printf "$(BLUE)publish-check$(RESET)\n"
