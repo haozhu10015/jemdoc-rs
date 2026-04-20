@@ -39,7 +39,7 @@ dependencies = [
 
 [[package]]
 name = "jemdoc-rs"
-version = "0.7.3"
+version = "0.8.0"
 dependencies = [
  "fancy-regex",
  "jiff",

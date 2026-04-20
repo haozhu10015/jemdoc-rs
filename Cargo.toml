@@ -1,6 +1,6 @@
 [package]
 name = "jemdoc-rs"
-version = "0.7.3"
+version = "0.8.0"
 edition = "2024"
 description = "A Rust rewrite of jemdoc, a light text-based markup language for creating static websites."
 license = "Apache-2.0"
