@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{codeblocks.html}, showsource
+# jemdoc: menu{MENU}{codeblocks.html}, nodate, showsource
 = Code Blocks
 
 Code blocks are delimited by +\~\~\~+ and support syntax highlighting for several languages.

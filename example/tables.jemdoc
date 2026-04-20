@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{tables.html}, showsource
+# jemdoc: menu{MENU}{tables.html}, nodate, showsource
 = Tables
 
 Tables are created inside +\~\~\~+ blocks with the +table+ keyword.

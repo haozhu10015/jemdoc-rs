@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{mathjax.html}, showsource
+# jemdoc: menu{MENU}{mathjax.html}, nodate, showsource
 = MathJax
 
 +jemdoc-rs+ uses [https://www.mathjax.org MathJax 4] for math rendering.  MathJax is always included unless the +noeqs+ [directives.html directive] is set.

@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{directives.html}
+# jemdoc: menu{MENU}{directives.html}, nodate
 # jemdoc: showsource
 = Header Directives and Configuration
 

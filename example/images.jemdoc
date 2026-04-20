@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{images.html}, showsource
+# jemdoc: menu{MENU}{images.html}, nodate, showsource
 = Images
 
 jemdoc-rs supports both inline images and image blocks.

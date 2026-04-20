@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{formatting.html}, showsource
+# jemdoc: menu{MENU}{formatting.html}, nodate, showsource
 = Text Formatting
 
 +jemdoc-rs+ provides several inline formatting options.

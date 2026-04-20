@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{infoblocks.html}, showsource
+# jemdoc: menu{MENU}{infoblocks.html}, nodate, showsource
 == Info Blocks and Raw HTML
 
 == Info Blocks

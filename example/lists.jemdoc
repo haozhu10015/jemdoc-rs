@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{lists.html}, showsource
+# jemdoc: menu{MENU}{lists.html}, nodate, showsource
 = Lists
 
 +jemdoc-rs+ supports unordered, ordered, and definition lists, including nesting.
