@@ -16,10 +16,11 @@ clippy: ## run clippy
 	@printf "$(BLUE)clippy$(RESET)\n"
 	@cargo clippy --all-targets --all-features -- -D warnings
 
-test: ## run tests
+test: ## run tests and build docs
 	@printf "$(BLUE)test$(RESET)\n"
 	@cargo test --all-features
 	@cargo test --no-default-features
+	@cargo doc --no-deps --all-features
 
 snapshots: ## check example HTML snapshots
 	@printf "$(BLUE)snapshots$(RESET)\n"

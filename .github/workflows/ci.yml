@@ -75,17 +75,6 @@ jobs:
       - name: Run clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
 
-  examples:
-    name: Build Examples
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
   msrv:
     name: Check MSRV (1.87)
     runs-on: ubuntu-latest
