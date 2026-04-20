@@ -197,11 +197,7 @@ fn parse_conf_content(content: &str, syntax: &mut HashMap<String, String>) {
                 let mut section_content = String::new();
 
                 // Read content lines until empty line or EOF
-                loop {
-                    let cline = match read_noncomment(&lines, &mut pos) {
-                        Some(l) => l,
-                        None => break,
-                    };
+                while let Some(cline) = read_noncomment(&lines, &mut pos) {
                     if cline.trim().is_empty() {
                         break;
                     }

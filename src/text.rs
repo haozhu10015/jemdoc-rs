@@ -53,7 +53,7 @@ pub fn mathjax_eq_resub(r: &str) -> String {
 /// This manually iterates through matches since fancy_regex's replace_all
 /// may have limitations with complex replacement patterns.
 pub fn re_replace_all(pattern: &str, text: &str, replacement: &str) -> String {
-    let re = Regex::new(pattern).expect(&format!("Invalid regex: {}", pattern));
+    let re = Regex::new(pattern).unwrap_or_else(|_| panic!("Invalid regex: {}", pattern));
     let mut result = String::new();
     let mut last_end = 0;
     let mut search_start = 0;
@@ -262,8 +262,8 @@ pub fn replace_equations(b: &str) -> String {
 
 /// Replace [img{width}{height}{alttext} location caption] with <img> tags.
 pub fn replace_images(b: &str) -> String {
-    let re = Regex::new(r"(?ms)(?<!\\)\[img((?:\{.*?\}){0,3})\s(.*?)(?:\s(.*?))?(?<!\\)\]")
-        .unwrap();
+    let re =
+        Regex::new(r"(?ms)(?<!\\)\[img((?:\{.*?\}){0,3})\s(.*?)(?:\s(.*?))?(?<!\\)\]").unwrap();
     let re_braces = Regex::new(r"(?ms)\{(.*?)\}").unwrap();
     let mut result = b.to_string();
     let mut search_start = 0;
@@ -292,7 +292,7 @@ pub fn replace_images(b: &str) -> String {
                 }
 
                 let mut bits = Vec::new();
-                bits.push(format!("src=\\\"{}\\\"" , quote(location)));
+                bits.push(format!("src=\\\"{}\\\"", quote(location)));
 
                 if !attrs[0].is_empty() {
                     let w = if attrs[0].chars().all(|c| c.is_ascii_digit()) {
@@ -300,7 +300,7 @@ pub fn replace_images(b: &str) -> String {
                     } else {
                         attrs[0].clone()
                     };
-                    bits.push(format!("width=\\\"{}\\\"" , quote(&w)));
+                    bits.push(format!("width=\\\"{}\\\"", quote(&w)));
                 }
                 if !attrs[1].is_empty() {
                     let h = if attrs[1].chars().all(|c| c.is_ascii_digit()) {
@@ -308,10 +308,10 @@ pub fn replace_images(b: &str) -> String {
                     } else {
                         attrs[1].clone()
                     };
-                    bits.push(format!("height=\\\"{}\\\"" , quote(&h)));
+                    bits.push(format!("height=\\\"{}\\\"", quote(&h)));
                 }
                 if !attrs[2].is_empty() {
-                    bits.push(format!("alt=\\\"{}\\\"" , quote(&attrs[2])));
+                    bits.push(format!("alt=\\\"{}\\\"", quote(&attrs[2])));
                 } else {
                     bits.push("alt=\\\"\\\"".to_string());
                 }
@@ -355,14 +355,13 @@ pub fn replace_links(b: &str) -> String {
                     option = "TARGETBLANK65358";
                 }
 
-                let mut link = if m1.contains('@')
-                    && !m1.starts_with("mailto:")
-                    && !m1.starts_with("http://")
-                {
-                    format!("mailto:{}", m1)
-                } else {
-                    m1.clone()
-                };
+                let mut link =
+                    if m1.contains('@') && !m1.starts_with("mailto:") && !m1.starts_with("http://")
+                    {
+                        format!("mailto:{}", m1)
+                    } else {
+                        m1.clone()
+                    };
 
                 // Unquote hashes
                 link = link.replace("\\#", "#");
@@ -377,10 +376,7 @@ pub fn replace_links(b: &str) -> String {
                     link.replace("mailto:", "").clone()
                 };
 
-                let replacement = format!(
-                    "<a href=\\\"{}\\\"{}>{}<\\/a>",
-                    link, option, linkname
-                );
+                let replacement = format!("<a href=\\\"{}\\\"{}>{}<\\/a>", link, option, linkname);
                 let new_result = format!(
                     "{}{}{}",
                     &result[..m.start()],
@@ -406,12 +402,7 @@ pub fn remove_trailing_comment(s: &str) -> String {
     for i in 0..chars.len() {
         if chars[i] == '#' && (i == 0 || chars[i - 1] != '\\') {
             let mut end = i;
-            while end > 0
-                && matches!(
-                    chars[end - 1],
-                    ' ' | '\t' | '\r' | '\n'
-                )
-            {
+            while end > 0 && matches!(chars[end - 1], ' ' | '\t' | '\r' | '\n') {
                 end -= 1;
             }
             let result: String = chars[..end].iter().collect();
@@ -470,7 +461,7 @@ pub fn br(b: &str, eqs: bool, tableblock: bool, tablerow: &mut usize) -> String 
     b = allreplace(&b);
 
     // Remove leading spaces, tabs, dashes, dots
-    b = b.trim_start_matches(|c: char| c == '-' || c == '.' || c == ' ' || c == '\t').to_string();
+    b = b.trim_start_matches(['-', '.', ' ', '\t']).to_string();
 
     // Replace images
     b = replace_images(&b);
@@ -502,11 +493,7 @@ pub fn br(b: &str, eqs: bool, tableblock: bool, tablerow: &mut usize) -> String 
     b = re_replace_all(r"(?ms)(?<!\\)\+(.*?)(?<!\\)\+", &b, "<tt>$1</tt>");
 
     // Double quotes: "text"
-    b = re_replace_all(
-        r#"(?ms)(?<!\\)"(.*?)(?<!\\)""#,
-        &b,
-        "&ldquo;$1&rdquo;",
-    );
+    b = re_replace_all(r#"(?ms)(?<!\\)"(.*?)(?<!\\)""#, &b, "&ldquo;$1&rdquo;");
 
     // Left quote: `
     b = re_replace_all(r"(?ms)(?<!\\)`", &b, "&lsquo;");

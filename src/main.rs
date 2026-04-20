@@ -48,8 +48,7 @@ See https://github.com/haozhu10015/jemdoc-rs for more details."#;
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    if args.len() == 1 || args.contains(&"--help".to_string()) || args.contains(&"-h".to_string())
-    {
+    if args.len() == 1 || args.contains(&"--help".to_string()) || args.contains(&"-h".to_string()) {
         show_help();
         process::exit(0);
     }

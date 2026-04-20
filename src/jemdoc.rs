@@ -4,11 +4,11 @@ use std::io::Write;
 
 use fancy_regex::Regex;
 
-use crate::text::{
-    allreplace, br, hb_format, mathjax_eq_resub, prepend_nbsps,
-    re_replace_all, remove_trailing_comment,
-};
 use crate::highlight::{format_language, format_pyint, get_hl};
+use crate::text::{
+    allreplace, br, hb_format, mathjax_eq_resub, prepend_nbsps, re_replace_all,
+    remove_trailing_comment,
+};
 
 /// The main jemdoc parser and processor.
 pub struct JemdocParser {
@@ -69,7 +69,13 @@ impl JemdocParser {
     }
 
     /// Write a half-block to the output.
-    pub fn hb(&mut self, tag: &str, content1: &str, content2: Option<&str>, content3: Option<&str>) {
+    pub fn hb(
+        &mut self,
+        tag: &str,
+        content1: &str,
+        content2: Option<&str>,
+        content3: Option<&str>,
+    ) {
         let s = hb_format(tag, content1, content2, content3);
         self.out(&s);
     }
@@ -139,8 +145,7 @@ impl JemdocParser {
             }
 
             let line = self.lines[self.pos].clone();
-            let trimmed = line
-                .trim_start_matches(|c: char| c == ' ' || c == '\t');
+            let trimmed = line.trim_start_matches([' ', '\t']);
 
             // Empty line
             if trimmed.is_empty() || trimmed == "\n" {
@@ -197,7 +202,7 @@ impl JemdocParser {
         }
 
         // Strip leading whitespace
-        s = s.trim_start_matches(|c: char| c == ' ' || c == '\t').to_string();
+        s = s.trim_start_matches([' ', '\t']).to_string();
 
         // Remove trailing comments
         let trimmed = remove_trailing_comment(&s);
@@ -215,8 +220,7 @@ impl JemdocParser {
         };
 
         // Strip leading marker characters (-, ., =, :)
-        s = s.trim_start_matches(|c: char| c == '-' || c == '.' || c == '=' || c == ':')
-            .to_string();
+        s = s.trim_start_matches(['-', '.', '=', ':']).to_string();
 
         Some((s, count))
     }
@@ -224,16 +228,11 @@ impl JemdocParser {
     /// Get the next paragraph from the input file.
     /// Reads lines until a paragraph-break signal is encountered.
     pub fn np(&mut self, withcount: bool, eatblanks: bool) -> Option<(String, usize)> {
-        let (mut s, c) = match self.nl(withcount, false) {
-            Some(v) => v,
-            None => return None,
-        };
+        let (mut s, c) = self.nl(withcount, false)?;
 
         // Detect open inline equation blocks
         let dollar_re = Regex::new(r"(?<!\\)\$").unwrap();
-        let match_count = dollar_re
-            .find_iter(&s)
-            .count();
+        let match_count = dollar_re.find_iter(&s).count();
         let mut lm = match_count % 2;
         let mut is_open_eq = lm == 1;
 
@@ -300,11 +299,7 @@ impl JemdocParser {
     /// Process a dash-list (unordered) or dot-list (ordered).
     pub fn dashlist(&mut self, ordered: bool) {
         let mut level = 0usize;
-        let (char_marker, ul_tag) = if ordered {
-            (".", "ol")
-        } else {
-            ("-", "ul")
-        };
+        let (char_marker, ul_tag) = if ordered { (".", "ol") } else { ("-", "ul") };
 
         while self.pc(true) == char_marker {
             let (s, newlevel) = match self.np(true, false) {
@@ -370,11 +365,7 @@ impl JemdocParser {
     pub fn codeblock(&mut self, title: Option<&str>, lang: &str) {
         if lang == "raw" {
             // Raw mode: output verbatim
-            loop {
-                let line = match self.nl(false, true) {
-                    Some((l, _)) => l,
-                    None => break,
-                };
+            while let Some((line, _)) = self.nl(false, true) {
                 if line.starts_with('~') {
                     break;
                 }
@@ -392,11 +383,7 @@ impl JemdocParser {
             // Filter through external program (simplified - just output raw).
             // In the Python version, lang is the external command name.
             let mut buff = String::new();
-            loop {
-                let line = match self.nl(false, true) {
-                    Some((l, _)) => l,
-                    None => break,
-                };
+            while let Some((line, _)) = self.nl(false, true) {
                 if line.starts_with('~') {
                     break;
                 }
@@ -431,19 +418,12 @@ impl JemdocParser {
         let mut stringmode = false;
         let mut first_line = true;
 
-        loop {
-            let line = match self.nl(false, true) {
-                Some((l, _)) => l,
-                None => break,
-            };
-
+        while let Some((line, _)) = self.nl(false, true) {
             if line.starts_with('~') {
                 break;
             }
 
-            let line = if line.starts_with("\\~") {
-                line[1..].to_string()
-            } else if line.starts_with("\\{") {
+            let line = if line.starts_with("\\~") || line.starts_with("\\{") {
                 line[1..].to_string()
             } else {
                 line
@@ -507,9 +487,7 @@ impl JemdocParser {
                     self.out(&line[1..]);
                 } else if line.starts_with('#') && self.do_includes(&line[1..]) {
                     continue;
-                } else if (lang == "python" || lang == "py")
-                    && line.trim().starts_with("\"\"\"")
-                {
+                } else if (lang == "python" || lang == "py") && line.trim().starts_with("\"\"\"") {
                     self.out(&format!("<span class=\"string\">{}", line));
                     stringmode = true;
                 } else {
@@ -560,16 +538,15 @@ impl JemdocParser {
         // Resolve the MENU file path:
         // 1. Try the path as given (relative to CWD).
         // 2. Fall back to resolving relative to the input file's directory.
-        let menu_path = if std::path::Path::new(mname).is_absolute() {
-            std::path::PathBuf::from(mname)
-        } else if std::path::Path::new(mname).exists() {
-            std::path::PathBuf::from(mname)
-        } else {
-            let indir = std::path::Path::new(&self.inname)
-                .parent()
-                .unwrap_or_else(|| std::path::Path::new("."));
-            indir.join(mname)
-        };
+        let menu_path =
+            if std::path::Path::new(mname).is_absolute() || std::path::Path::new(mname).exists() {
+                std::path::PathBuf::from(mname)
+            } else {
+                let indir = std::path::Path::new(&self.inname)
+                    .parent()
+                    .unwrap_or_else(|| std::path::Path::new("."));
+                indir.join(mname)
+            };
         let menu_content = match fs::read_to_string(&menu_path) {
             Ok(c) => c,
             Err(_) => return,
@@ -628,19 +605,9 @@ impl JemdocParser {
                 }
 
                 if !current.is_empty() && link.ends_with(current) {
-                    self.hb(
-                        &currentmenuitem_conf,
-                        &link,
-                        Some(&menuitem),
-                        Some(option),
-                    );
+                    self.hb(&currentmenuitem_conf, &link, Some(&menuitem), Some(option));
                 } else {
-                    self.hb(
-                        &menuitem_conf,
-                        &link,
-                        Some(&menuitem),
-                        Some(option),
-                    );
+                    self.hb(&menuitem_conf, &link, Some(&menuitem), Some(option));
                 }
             } else {
                 // Menu category
@@ -682,8 +649,7 @@ impl JemdocParser {
                 continue;
             }
 
-            if line.starts_with("# jemdoc:") {
-                let directives = &line["# jemdoc:".len()..];
+            if let Some(directives) = line.strip_prefix("# jemdoc:") {
                 let re_braces = Regex::new(r"(?ms)(?<!\\)\{(.*?)(?<!\\)\}").unwrap();
 
                 for directive in directives.split(',') {
@@ -734,8 +700,7 @@ impl JemdocParser {
                     } else if d.starts_with("analytics") {
                         let ss = 0;
                         if let Ok(Some(caps)) = re_braces.captures_from_pos(d, ss) {
-                            self.analytics =
-                                Some(caps.get(1).unwrap().as_str().to_string());
+                            self.analytics = Some(caps.get(1).unwrap().as_str().to_string());
                         }
                     } else if d.starts_with("title") {
                         let ss = 0;
@@ -782,9 +747,7 @@ impl JemdocParser {
                 processed.pop();
             }
             if title.is_none() {
-                title = Some(
-                    re_replace_all(r" *(<br />)|(&nbsp;) *", &processed, " ").to_string(),
-                );
+                title = Some(re_replace_all(r" *(<br />)|(&nbsp;) *", &processed, " ").to_string());
             }
             Some(processed)
         } else {
@@ -856,11 +819,7 @@ impl JemdocParser {
                     // Skip the equation block without processing
                     let (s, _) = self.nl(false, false).unwrap_or_default();
                     if !s.trim().ends_with("\\)") {
-                        loop {
-                            let line = match self.nl(false, true) {
-                                Some((l, _)) => l,
-                                None => break,
-                            };
+                        while let Some((line, _)) = self.nl(false, true) {
                             if line.trim() == "\\)" {
                                 break;
                             }
@@ -872,11 +831,7 @@ impl JemdocParser {
 
                 // Check if equation is single-line
                 if !s.trim().ends_with("\\)") {
-                    loop {
-                        let line = match self.nl(false, true) {
-                            Some((l, _)) => l,
-                            None => break,
-                        };
+                    while let Some((line, _)) = self.nl(false, true) {
                         s.push_str(&line);
                         if line.trim() == "\\)" {
                             break;

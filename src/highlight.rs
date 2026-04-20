@@ -1,7 +1,7 @@
 use crate::text::{allreplace, hb_format, re_replace_all};
 
 /// Syntax highlighting definition for a programming language.
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct HighlightDef {
     pub strings: bool,
     pub statement: Vec<String>,
@@ -10,20 +10,6 @@ pub struct HighlightDef {
     pub special: Vec<String>,
     pub error: Vec<String>,
     pub commentuntilend: Vec<String>,
-}
-
-impl Default for HighlightDef {
-    fn default() -> Self {
-        HighlightDef {
-            strings: false,
-            statement: Vec::new(),
-            builtin: Vec::new(),
-            operator: Vec::new(),
-            special: Vec::new(),
-            error: Vec::new(),
-            commentuntilend: Vec::new(),
-        }
-    }
 }
 
 /// Wrap each item with word boundaries \b...\b for precise matching.
@@ -38,14 +24,35 @@ pub fn get_hl(lang: &str) -> HighlightDef {
     match lang {
         "py" | "python" => {
             d.statement = put_bsbs(&[
-                "break", "continue", "del", "except", "exec", "finally", "pass", "print",
-                "raise", "return", "try", "with", "global", "assert", "lambda", "yield", "def",
-                "class", "for", "while", "if", "elif", "else", "import", "from", "as", "assert",
+                "break", "continue", "del", "except", "exec", "finally", "pass", "print", "raise",
+                "return", "try", "with", "global", "assert", "lambda", "yield", "def", "class",
+                "for", "while", "if", "elif", "else", "import", "from", "as", "assert",
             ]);
             d.builtin = put_bsbs(&[
-                "True", "False", "set", "open", "frozenset", "enumerate", "object", "hasattr",
-                "getattr", "filter", "eval", "zip", "vars", "unicode", "type", "str", "repr",
-                "round", "range", "and", "in", "is", "not", "or",
+                "True",
+                "False",
+                "set",
+                "open",
+                "frozenset",
+                "enumerate",
+                "object",
+                "hasattr",
+                "getattr",
+                "filter",
+                "eval",
+                "zip",
+                "vars",
+                "unicode",
+                "type",
+                "str",
+                "repr",
+                "round",
+                "range",
+                "and",
+                "in",
+                "is",
+                "not",
+                "or",
             ]);
             d.special = put_bsbs(&[
                 "cols", "optvar", "param", "problem", "norm2", "norm1", "value", "minimize",
@@ -58,8 +65,8 @@ pub fn get_hl(lang: &str) -> HighlightDef {
         "c" | "c++" | "cpp" => {
             d.statement = put_bsbs(&["if", "else", "printf", "return", "for"]);
             d.builtin = put_bsbs(&[
-                "static", "typedef", "int", "float", "double", "void", "clock_t", "struct",
-                "long", "extern", "char",
+                "static", "typedef", "int", "float", "double", "void", "clock_t", "struct", "long",
+                "extern", "char",
             ]);
             d.operator = vec![
                 "#include.*".to_string(),
@@ -78,10 +85,8 @@ pub fn get_hl(lang: &str) -> HighlightDef {
             ];
 
             if lang == "c++" || lang == "cpp" {
-                d.builtin
-                    .extend(put_bsbs(&["bool", "virtual"]));
-                d.statement
-                    .extend(put_bsbs(&["new", "delete"]));
+                d.builtin.extend(put_bsbs(&["bool", "virtual"]));
+                d.statement.extend(put_bsbs(&["new", "delete"]));
                 d.operator
                     .extend(vec!["&lt;&lt;".to_string(), "&gt;&gt;".to_string()]);
                 d.special = vec![
@@ -95,8 +100,8 @@ pub fn get_hl(lang: &str) -> HighlightDef {
         }
         "rb" | "ruby" => {
             d.statement = put_bsbs(&[
-                "while", "until", "unless", "if", "elsif", "when", "then", "else", "end",
-                "begin", "rescue", "class", "def",
+                "while", "until", "unless", "if", "elsif", "when", "then", "else", "end", "begin",
+                "rescue", "class", "def",
             ]);
             d.operator = put_bsbs(&["and", "not", "or"]);
             d.builtin = put_bsbs(&["true", "false", "require", "warn"]);
@@ -169,15 +174,11 @@ pub fn get_hl(lang: &str) -> HighlightDef {
                 "true", "type", "unsafe", "use", "where", "while", "async", "await", "dyn",
             ]);
             d.builtin = put_bsbs(&[
-                "bool", "u8", "u16", "u32", "u64", "u128", "usize",
-                "i8", "i16", "i32", "i64", "i128", "isize",
-                "f32", "f64", "char", "str", "String", "Vec", "Option", "Result",
+                "bool", "u8", "u16", "u32", "u64", "u128", "usize", "i8", "i16", "i32", "i64",
+                "i128", "isize", "f32", "f64", "char", "str", "String", "Vec", "Option", "Result",
                 "Some", "None", "Ok", "Err", "Box", "Rc", "Arc",
             ]);
-            d.operator = vec![
-                "#\\[.*\\]".to_string(),
-                "#!\\[.*\\]".to_string(),
-            ];
+            d.operator = vec!["#\\[.*\\]".to_string(), "#!\\[.*\\]".to_string()];
             d.error = put_bsbs(&[r"\w*Error", r"\w*Err"]);
             d.commentuntilend = vec!["//".to_string()];
             d.strings = true;
@@ -203,16 +204,8 @@ pub fn format_language(l: &str, hl: &HighlightDef) -> String {
 
     // Handle strings
     if hl.strings {
-        line = re_replace_all(
-            r#"(".*?")"#,
-            &line,
-            "<span CLCLclass=\"string\">$1</span>",
-        );
-        line = re_replace_all(
-            r"('.*?')",
-            &line,
-            "<span CLCLclass=\"string\">$1</span>",
-        );
+        line = re_replace_all(r#"(".*?")"#, &line, "<span CLCLclass=\"string\">$1</span>");
+        line = re_replace_all(r"('.*?')", &line, "<span CLCLclass=\"string\">$1</span>");
     }
 
     // Apply keyword highlighting
@@ -259,28 +252,16 @@ pub fn format_language(l: &str, hl: &HighlightDef) -> String {
                 }
             }
             if hl.commentuntilend.contains(&"//".to_string()) {
-                line = re_replace_all(
-                    r"//.*",
-                    &line,
-                    "<span class=\"comment\">$0</span>",
-                );
+                line = re_replace_all(r"//.*", &line, "<span class=\"comment\">$0</span>");
             }
         } else {
             let cue = &hl.commentuntilend[0];
             match cue.as_str() {
                 "#" => {
-                    line = re_replace_all(
-                        r"#.*",
-                        &line,
-                        "<span class=\"comment\">$0</span>",
-                    );
+                    line = re_replace_all(r"#.*", &line, "<span class=\"comment\">$0</span>");
                 }
                 "%" => {
-                    line = re_replace_all(
-                        r"%.*",
-                        &line,
-                        "<span class=\"comment\">$0</span>",
-                    );
+                    line = re_replace_all(r"%.*", &line, "<span class=\"comment\">$0</span>");
                 }
                 _ => {
                     if line.trim().starts_with(cue.as_str()) {

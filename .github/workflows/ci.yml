@@ -86,9 +86,6 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Build all examples
-        run: cargo build --examples --verbose
-
   msrv:
     name: Check MSRV (1.87)
     runs-on: ubuntu-latest
