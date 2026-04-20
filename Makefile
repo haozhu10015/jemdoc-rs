@@ -4,7 +4,7 @@ RESET := \033[0m
 
 .DEFAULT_GOAL := ci
 
-.PHONY: ci fmt clippy test snapshots update-snapshots publish-check clean help
+.PHONY: ci fmt clippy test snapshots update-snapshots publish-check release clean help
 
 ci: fmt clippy test snapshots publish-check ## run all CI checks
 
@@ -37,6 +37,12 @@ update-snapshots: ## regenerate and commit example HTML snapshots
 	@cargo build --release 2>/dev/null
 	@cd example && ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
 	@printf "$(BLUE)Snapshots updated. Stage with: git add example/*.html$(RESET)\n"
+
+release: ## tag and push a release from the version in Cargo.toml
+	@VERSION=$$(grep '^version' Cargo.toml | head -1 | sed 's/.*= *"\(.*\)"/\1/'); \
+	TAG="v$$VERSION"; \
+	printf "$(BLUE)Tagging $$TAG$(RESET)\n"; \
+	git tag "$$TAG" && git push --tags
 
 publish-check: ## verify the package can be published
 	@printf "$(BLUE)publish-check$(RESET)\n"
