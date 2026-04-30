@@ -25,3 +25,6 @@ target
 
 # MacOS
 .DS_Store
+
+# CodeX
+.codex
