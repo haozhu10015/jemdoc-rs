@@ -5,7 +5,6 @@ RESET := \033[0m
 
 CONF  := mysite.conf
 JEMDOC_SRC := *.jemdoc
-JEMDOC_RS_REPO := https://github.com/haozhu10015/jemdoc-rs.git
 
 .DEFAULT_GOAL := help
 
@@ -19,12 +18,12 @@ ensure = @command -v $(1) >/dev/null 2>&1 || \
 install: ## install all dependencies (requires Rust/Cargo)
 	@command -v cargo >/dev/null 2>&1 || { printf "cargo not found, install Rust first: https://rustup.rs\n"; exit 1; }
 	@printf "$(BLUE)Installing jemdoc-rs...$(RESET)\n"
-	@cargo install --git $(JEMDOC_RS_REPO)
+	@cargo install jemdoc-rs
 	@printf "$(BLUE)Installing simple-http-server...$(RESET)\n"
 	@cargo install simple-http-server
 
 jemdoc: ## generate all jemdoc pages
-	$(call ensure,jemdoc-rs,cargo install --git $(JEMDOC_RS_REPO))
+	$(call ensure,jemdoc-rs,cargo install jemdoc-rs)
 	@printf "$(BLUE)Generating jemdoc webpage...$(RESET)\n"
 	@jemdoc-rs -c $(CONF) $(JEMDOC_SRC)
 
