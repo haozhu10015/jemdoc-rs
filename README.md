@@ -4,6 +4,8 @@ A Rust rewrite of [jemdoc+MathJax](https://github.com/wsshin/jemdoc_mathjax), a 
 
 `jemdoc-rs` converts `.jemdoc` source files into clean, standards-compliant HTML5 pages with built-in support for MathJax 4.
 
+An example of a jemdoc-rendered page is available at the [docs](https://haozhu10015.github.io/jemdoc-rs) page.
+
 ## Installation
 
 ### Using `cargo install`
@@ -59,7 +61,9 @@ jemdoc-rs [OPTIONS] [SOURCEFILE...]
 
 ## Docs
 
-The `docs/` directory contains a set of `.jemdoc` files demonstrating the full feature set. To generate and preview them:
+You could either browse the rendered [docs](https://haozhu10015.github.io/jemdoc-rs), or:
+
+The `docs/` directory contains the source `.jemdoc` files demonstrating the full feature set. To generate and preview them locally:
 
 ```sh
 cd docs
