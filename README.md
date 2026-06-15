@@ -57,12 +57,12 @@ jemdoc-rs [OPTIONS] [SOURCEFILE...]
 | `--version` | Show version information |
 | `--help`, `-h` | Show help message |
 
-## Example
+## Docs
 
-The `example/` directory contains a set of `.jemdoc` files demonstrating the full feature set. To generate and preview them:
+The `docs/` directory contains a set of `.jemdoc` files demonstrating the full feature set. To generate and preview them:
 
 ```sh
-cd example
+cd docs
 
 # Generate all HTML pages
 make jemdoc

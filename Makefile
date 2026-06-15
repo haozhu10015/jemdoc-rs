@@ -22,21 +22,21 @@ test: ## run tests and build docs
 	@cargo test --no-default-features
 	@cargo doc --no-deps --all-features
 
-snapshots: ## check example HTML snapshots
+snapshots: ## check docs HTML snapshots
 	@printf "$(BLUE)snapshots$(RESET)\n"
 	@cargo build --release 2>/dev/null
-	@cd example && ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
-	@git diff --exit-code -- example/*.html || { \
+	@cd docs && ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
+	@git diff --exit-code -- docs/*.html || { \
 		echo ""; \
-		echo "Example HTML is out of date. Run: make update-snapshots"; \
+		echo "Docs HTML is out of date. Run: make update-snapshots"; \
 		exit 1; \
 	}
 
-update-snapshots: ## regenerate and commit example HTML snapshots
+update-snapshots: ## regenerate docs HTML snapshots
 	@printf "$(BLUE)update-snapshots$(RESET)\n"
 	@cargo build --release 2>/dev/null
-	@cd example && ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
-	@printf "$(BLUE)Snapshots updated. Stage with: git add example/*.html$(RESET)\n"
+	@cd docs && ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
+	@printf "$(BLUE)Snapshots updated. Stage with: git add docs/*.html$(RESET)\n"
 
 release: ## tag and push a release from the version in Cargo.toml
 	@VERSION=$$(grep '^version' Cargo.toml | head -1 | sed 's/.*= *"\(.*\)"/\1/'); \

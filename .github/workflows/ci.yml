@@ -91,8 +91,8 @@ jobs:
       - name: Check build with MSRV
         run: cargo check --all-features
 
-  example-snapshots:
-    name: Example Snapshot Check
+  docs-snapshots:
+    name: Docs Snapshot Check
     runs-on: ubuntu-latest
 
     steps:
@@ -105,16 +105,16 @@ jobs:
       - name: Build jemdoc-rs
         run: cargo build --release
 
-      - name: Regenerate example HTML
-        working-directory: example
+      - name: Regenerate docs HTML
+        working-directory: docs
         run: ../target/release/jemdoc-rs -c mysite.conf *.jemdoc
 
       - name: Check for snapshot drift
         run: |
-          git diff --exit-code -- example/*.html || {
+          git diff --exit-code -- docs/*.html || {
             echo ""
-            echo "Example HTML is out of date. Regenerate with:"
-            echo "  cd example && jemdoc-rs -c mysite.conf *.jemdoc"
+            echo "Docs HTML is out of date. Regenerate with:"
+            echo "  cd docs && jemdoc-rs -c mysite.conf *.jemdoc"
             exit 1
           }
 
